@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var pokemons: [Pokemon] = PokemonGenerator.getPokemonArray()
 
     override func viewDidLoad() {
         super.viewDidLoad()
