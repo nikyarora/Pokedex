@@ -49,7 +49,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     func initializeRandButton(){
         randButton = UIButton(frame: CGRect(x: 0, y: view.frame.maxY - 50, width: (view.frame.width / 2), height: 50))
         randButton.setTitle("Random", for: .normal)
-        //randButton.titleLabel?.font = UIFont()
+        randButton.titleLabel?.font = UIFont(name: "Pokemon Classic", size: 14.0)
         //randButton.titleLabel?.setTextSpacing(spacing: 0.7)
         randButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
         randButton.addTarget(self, action: #selector(generateRandomPokemon), for: .touchUpInside)
