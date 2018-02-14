@@ -20,8 +20,16 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var searchBar: UISearchBar!
     var searchText: String!
     
-    //Buttons
+    //Buttons and Labels
     var randButton: UIButton!
+    var attackPoints: UIButton!
+    var attackPointsLab: UILabel!
+    var defensePoints: UIButton!
+    var defensePointsLab: UILabel!
+    var healthPoints: UIButton!
+    var healthPointsLab: UILabel!
+    var attributesLabel: UILabel!
+    var typeLabel: UILabel!
     
     //Type Scroll View
     let screenWidth = UIScreen.main.bounds.size.width
@@ -35,6 +43,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
         initializeSearch()
         initializeRandButton()
         initializeScrollView()
+        initializeTitleLabels()
+        initializeAttackPoints()
+        initializeDefensePoints()
+        initializeHealthPoints()
         
     }
 
@@ -48,6 +60,18 @@ class ViewController: UIViewController, UISearchBarDelegate {
         scrollView.reloadData(initialIndex: 0)
     }
     
+    func initializeTitleLabels() {
+        typeLabel = UILabel(frame: CGRect(x: 15, y: (navigationController?.navigationBar.frame.maxY)! + 25, width: view.frame.width, height: 50))
+        typeLabel.text = "Types: "
+        typeLabel.font = UIFont(name: "Pokemon Classic", size: 16.0)
+        view.addSubview(typeLabel)
+        
+        attributesLabel = UILabel(frame: CGRect(x: 15, y: scrollView.frame.maxY + 30, width: view.frame.width, height: 50))
+        attributesLabel.text = "Attributes: "
+        attributesLabel.font = UIFont(name: "Pokemon Classic", size: 16.0)
+        view.addSubview(attributesLabel)
+    }
+    
     func initializeSearch(){
         searchBar = UISearchBar()
         searchBar.delegate = self
@@ -59,7 +83,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initializeRandButton(){
-        randButton = UIButton(frame: CGRect(x: 0, y: view.frame.maxY - 50, width: (view.frame.width / 2), height: 50))
+        randButton = UIButton(frame: CGRect(x: 20, y: view.frame.maxY - 75, width: (view.frame.width / 2) - 20, height: 50))
+        randButton.layer.cornerRadius = 25
         randButton.setTitle("Random", for: .normal)
         randButton.titleLabel?.font = UIFont(name: "Pokemon Classic", size: 14.0)
         randButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
@@ -68,7 +93,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initializeScrollView() {
-        scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 200, width: view.frame.width + 2, height: 60))
+        scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 150, width: view.frame.width + 2, height: 60))
         scrollView.dataSource = self
         scrollView.delegate = self
         scrollView.maxScrollDistance = 5
@@ -89,6 +114,54 @@ class ViewController: UIViewController, UISearchBarDelegate {
         if segue.identifier == "showListScreen" {
             //send stuff
         }
+    }
+    
+    func initializeAttackPoints() {
+       attackPoints = UIButton(frame: CGRect(x:0, y:attributesLabel.frame.maxY + 10, width: view.frame.width, height: 50))
+        attackPoints.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
+        attackPoints.layer.cornerRadius = 25
+        attackPoints.titleLabel?.font = UIFont(name: "Pokemon Classic", size:12.0)
+        attackPoints.setTitle("Attack Points", for: .normal)
+        view.addSubview(attackPoints)
+        
+        attackPointsLab = UILabel(frame: CGRect(x: 0, y: attackPoints.frame.minY + (attackPoints.frame.height / 2) - 10, width: view.frame.width, height: 20))
+        attackPointsLab.text = "0-200"
+        attackPointsLab.font = UIFont(name: "Pokemon Classic", size: 12.0)
+        attackPointsLab.textColor = .white
+        attackPointsLab.frame = CGRect(x: view.frame.width - (attackPointsLab.intrinsicContentSize.width) - 15, y: attackPoints.frame.minY + (attackPoints.frame.height / 2) - 10, width: attackPointsLab.intrinsicContentSize.width, height: 20)
+        view.addSubview(attackPointsLab)
+    }
+    
+    func initializeDefensePoints() {
+        defensePoints = UIButton(frame: CGRect(x:0, y:attributesLabel.frame.maxY + 100, width: view.frame.width, height: 50))
+        defensePoints.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
+        defensePoints.layer.cornerRadius = 25
+        defensePoints.titleLabel?.font = UIFont(name: "Pokemon Classic", size:12.0)
+        defensePoints.setTitle("Defense Points", for: .normal)
+        view.addSubview(defensePoints)
+        
+        defensePointsLab = UILabel(frame: CGRect(x: 0, y: defensePoints.frame.minY + (defensePoints.frame.height / 2) - 10, width: view.frame.width, height: 20))
+        defensePointsLab.text = "0-200"
+        defensePointsLab.font = UIFont(name: "Pokemon Classic", size: 12.0)
+        defensePointsLab.textColor = .white
+        defensePointsLab.frame = CGRect(x: view.frame.width - (defensePointsLab.intrinsicContentSize.width) - 15, y: defensePoints.frame.minY + (defensePoints.frame.height / 2) - 10, width: defensePointsLab.intrinsicContentSize.width, height: 20)
+        view.addSubview(defensePointsLab)
+    }
+    
+    func initializeHealthPoints() {
+        healthPoints = UIButton(frame: CGRect(x:0, y:attributesLabel.frame.maxY + 200, width: view.frame.width, height: 50))
+        healthPoints.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
+        healthPoints.layer.cornerRadius = 25
+        healthPoints.titleLabel?.font = UIFont(name: "Pokemon Classic", size:12.0)
+        healthPoints.setTitle("Health Points", for: .normal)
+        view.addSubview(healthPoints)
+        
+        healthPointsLab = UILabel(frame: CGRect(x: 0, y: healthPoints.frame.minY + (healthPoints.frame.height / 2) - 10, width: view.frame.width, height: 20))
+        healthPointsLab.text = "0-200"
+        healthPointsLab.font = UIFont(name: "Pokemon Classic", size: 12.0)
+        healthPointsLab.textColor = .white
+        healthPointsLab.frame = CGRect(x: view.frame.width - (healthPointsLab.intrinsicContentSize.width) - 15, y: healthPoints.frame.minY + (healthPoints.frame.height / 2) - 10, width: healthPointsLab.intrinsicContentSize.width, height: 20)
+        view.addSubview(healthPointsLab)
     }
     
     func generateRandomPokemon() {
@@ -125,7 +198,7 @@ extension ViewController: LTInfiniteScrollViewDataSource {
             let size = screenWidth / CGFloat(numberOfVisibleViews())
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: size, height: size))
             label.textAlignment = .center
-            label.backgroundColor = UIColor.darkGray
+            label.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
             label.textColor = UIColor.white
             label.layer.cornerRadius = size / 2
             label.layer.masksToBounds = true
