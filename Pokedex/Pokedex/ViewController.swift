@@ -23,8 +23,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
     //Buttons
     var randButton: UIButton!
     
+    //Type Scroll View
     let screenWidth = UIScreen.main.bounds.size.width
     var scrollView: LTInfiniteScrollView!
+    var pokemonType: [UIImageView] = []
 
     override func viewDidLoad() {
         
@@ -32,18 +34,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         initializeSearch()
         initializeRandButton()
+        initializeScrollView()
         
-        scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 200, width: view.frame.width + 2, height: 80))
-        scrollView.dataSource = self
-        scrollView.delegate = self
-        scrollView.maxScrollDistance = 5
-        
-        let size = screenWidth / CGFloat(numberOfVisibleViews())
-        
-        scrollView.contentInset.left = screenWidth / 2 - size / 2
-        scrollView.contentInset.right = screenWidth / 2 - size / 2
-        
-        view.addSubview(scrollView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,6 +65,20 @@ class ViewController: UIViewController, UISearchBarDelegate {
         randButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
         randButton.addTarget(self, action: #selector(generateRandomPokemon), for: .touchUpInside)
         view.addSubview(randButton)
+    }
+    
+    func initializeScrollView() {
+        scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 200, width: view.frame.width + 2, height: 60))
+        scrollView.dataSource = self
+        scrollView.delegate = self
+        scrollView.maxScrollDistance = 5
+        
+        let size = screenWidth / CGFloat(numberOfVisibleViews())
+        
+        scrollView.contentInset.left = screenWidth / 2 - size / 2
+        scrollView.contentInset.right = screenWidth / 2 - size / 2
+        
+        view.addSubview(scrollView)
     }
     
     func dismissKeyboard(){
@@ -110,7 +116,9 @@ extension ViewController: LTInfiniteScrollViewDataSource {
     
     func viewAtIndex(_ index: Int, reusingView view: UIView?) -> UIView {
         if let label = view as? UILabel {
-            label.text = "\(index)"
+            for i in 0...17 {
+                label.text = "5"
+            }
             return label
         }
         else {
@@ -127,7 +135,7 @@ extension ViewController: LTInfiniteScrollViewDataSource {
     }
     
     func numberOfViews() -> Int {
-        return 10
+        return 18
     }
     
     func numberOfVisibleViews() -> Int {
