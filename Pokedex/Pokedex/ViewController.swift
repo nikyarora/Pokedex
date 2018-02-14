@@ -32,6 +32,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var attributesLabel: UILabel!
     var typeLabel: UILabel!
     
+    var minAttack: Int = 0
+    var minDefense: Int = 0
+    var minHealth: Int = 0
+    
     //Type Scroll View
     let screenWidth = UIScreen.main.bounds.size.width
     var scrollView: LTInfiniteScrollView!
@@ -64,12 +68,12 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initializeTitleLabels() {
-        typeLabel = UILabel(frame: CGRect(x: 15, y: (navigationController?.navigationBar.frame.maxY)! + 25, width: view.frame.width, height: 50))
+        typeLabel = UILabel(frame: CGRect(x: 15, y: (navigationController?.navigationBar.frame.maxY)! + 10, width: view.frame.width, height: 50))
         typeLabel.text = "Types: "
         typeLabel.font = UIFont(name: "Pokemon Classic", size: 16.0)
         view.addSubview(typeLabel)
         
-        attributesLabel = UILabel(frame: CGRect(x: 15, y: scrollView.frame.maxY + 30, width: view.frame.width, height: 50))
+        attributesLabel = UILabel(frame: CGRect(x: 15, y: scrollView.frame.maxY + 50, width: view.frame.width, height: 50))
         attributesLabel.text = "Attributes: "
         attributesLabel.font = UIFont(name: "Pokemon Classic", size: 16.0)
         view.addSubview(attributesLabel)
@@ -80,7 +84,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
-        navigationController?.navigationBar.backgroundColor = .blue
+        navigationController?.navigationBar.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
@@ -96,7 +100,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initializeScrollView() {
-        scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 150, width: view.frame.width + 2, height: 60))
+        scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 175, width: view.frame.width + 2, height: 50))
         scrollView.dataSource = self
         scrollView.delegate = self
         scrollView.maxScrollDistance = 5
@@ -133,7 +137,38 @@ class ViewController: UIViewController, UISearchBarDelegate {
         attackPointsLab.textColor = .white
         attackPointsLab.frame = CGRect(x: view.frame.width - (attackPointsLab.intrinsicContentSize.width) - 15, y: attackPoints.frame.minY + (attackPoints.frame.height / 2) - 10, width: attackPointsLab.intrinsicContentSize.width, height: 20)
         view.addSubview(attackPointsLab)
+        
+        attackPoints.addTarget(self, action: #selector(attackPointsPressed), for: .touchUpInside)
     }
+    
+    func attackPointsPressed(sender: UIButton) {
+        let alertAction = UIAlertController(title: "Enter Minimum Attack Points", message: nil, preferredStyle: .alert)
+        alertAction.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alertAction.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Enter Minimum"
+        })
+        
+        alertAction.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
+            
+                let text = alertAction.textFields?.first?.text
+                let num = Int(text!)!
+                if num >= 0 && num <= 200 {
+                    self.minAttack = Int(text!)!
+                    self.attackPointsLab.text = text! + "-200"
+                    self.resizeAttackLabel()
+                }
+                else {
+                    self.produceIntegerRangeError()
+                }
+        }))
+        self.present(alertAction, animated: true)
+    }
+    
+    func resizeAttackLabel() {
+        attackPointsLab.frame = CGRect(x: view.frame.width - (attackPointsLab.intrinsicContentSize.width) - 15, y: attackPoints.frame.minY + (attackPoints.frame.height / 2) - 10, width: attackPointsLab.intrinsicContentSize.width, height: 20)
+    }
+    
     
     func initializeDefensePoints() {
         defensePoints = UIButton(frame: CGRect(x:0, y:attributesLabel.frame.maxY + 100, width: view.frame.width, height: 50))
@@ -165,6 +200,12 @@ class ViewController: UIViewController, UISearchBarDelegate {
         healthPointsLab.textColor = .white
         healthPointsLab.frame = CGRect(x: view.frame.width - (healthPointsLab.intrinsicContentSize.width) - 15, y: healthPoints.frame.minY + (healthPoints.frame.height / 2) - 10, width: healthPointsLab.intrinsicContentSize.width, height: 20)
         view.addSubview(healthPointsLab)
+    }
+    
+    func produceIntegerRangeError() {
+        let alert = UIAlertController(title: "Error", message: "Please enter a valid integer between 0 and 200", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func generateRandomPokemon() {
@@ -199,7 +240,8 @@ extension ViewController: LTInfiniteScrollViewDataSource {
             let size = screenWidth / CGFloat(numberOfVisibleViews())
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: size, height: size))
             label.textAlignment = .center
-            label.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
+            label.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
+            label.font = UIFont(name: "Pokemon Classic", size: 11.0)
             label.textColor = UIColor.white
             label.layer.cornerRadius = size / 2
             label.layer.masksToBounds = true
