@@ -22,6 +22,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     //Buttons
     var randButton: UIButton!
+    
+    let screenWidth = UIScreen.main.bounds.size.width
+    var scrollView: LTInfiniteScrollView!
 
     override func viewDidLoad() {
         
@@ -29,11 +32,28 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         initializeSearch()
         initializeRandButton()
+        
+        scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 200, width: view.frame.width + 2, height: 80))
+        scrollView.dataSource = self
+        scrollView.delegate = self
+        scrollView.maxScrollDistance = 5
+        
+        let size = screenWidth / CGFloat(numberOfVisibleViews())
+        
+        scrollView.contentInset.left = screenWidth / 2 - size / 2
+        scrollView.contentInset.right = screenWidth / 2 - size / 2
+        
+        view.addSubview(scrollView)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        scrollView.reloadData(initialIndex: 0)
     }
     
     func initializeSearch(){
@@ -50,7 +70,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
         randButton = UIButton(frame: CGRect(x: 0, y: view.frame.maxY - 50, width: (view.frame.width / 2), height: 50))
         randButton.setTitle("Random", for: .normal)
         randButton.titleLabel?.font = UIFont(name: "Pokemon Classic", size: 14.0)
-        //randButton.titleLabel?.setTextSpacing(spacing: 0.7)
         randButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
         randButton.addTarget(self, action: #selector(generateRandomPokemon), for: .touchUpInside)
         view.addSubview(randButton)
@@ -85,5 +104,62 @@ class ViewController: UIViewController, UISearchBarDelegate {
         return i
     }
 
+}
+
+extension ViewController: LTInfiniteScrollViewDataSource {
+    
+    func viewAtIndex(_ index: Int, reusingView view: UIView?) -> UIView {
+        if let label = view as? UILabel {
+            label.text = "\(index)"
+            return label
+        }
+        else {
+            let size = screenWidth / CGFloat(numberOfVisibleViews())
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: size, height: size))
+            label.textAlignment = .center
+            label.backgroundColor = UIColor.darkGray
+            label.textColor = UIColor.white
+            label.layer.cornerRadius = size / 2
+            label.layer.masksToBounds = true
+            label.text = "\(index)"
+            return label
+        }
+    }
+    
+    func numberOfViews() -> Int {
+        return 10
+    }
+    
+    func numberOfVisibleViews() -> Int {
+        return 5
+    }
+}
+
+extension ViewController: LTInfiniteScrollViewDelegate {
+    
+    func updateView(_ view: UIView, withProgress progress: CGFloat, scrollDirection direction: LTInfiniteScrollView.ScrollDirection) {
+        let size = screenWidth / CGFloat(numberOfVisibleViews())
+        
+        var transform = CGAffineTransform.identity
+        // scale
+        let scale = (1.4 - 0.3 * (fabs(progress)))
+        transform = transform.scaledBy(x: scale, y: scale)
+        
+        // translate
+        var translate = size / 4 * progress
+        if progress > 1 {
+            translate = size / 4
+        }
+        else if progress < -1 {
+            translate = -size / 4
+        }
+        transform = transform.translatedBy(x: translate, y: 0)
+        
+        view.transform = transform
+    }
+    
+    func scrollViewDidScrollToIndex(_ scrollView: LTInfiniteScrollView, index: Int) {
+        print("scroll to index: \(index)")
+    }
 }
 
