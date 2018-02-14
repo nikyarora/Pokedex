@@ -35,6 +35,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     let screenWidth = UIScreen.main.bounds.size.width
     var scrollView: LTInfiniteScrollView!
     var pokemonType: [UIImageView] = []
+    var pokemonTypeNames = ["bug", "grass", "dark", "ground", "dragon", "ice", "electric", "normal", "fairy",
+    "poison", "fighting", "psychic", "fire", "rock", "flying", "steel", "ghost", "water"]
 
     override func viewDidLoad() {
         
@@ -189,9 +191,7 @@ extension ViewController: LTInfiniteScrollViewDataSource {
     
     func viewAtIndex(_ index: Int, reusingView view: UIView?) -> UIView {
         if let label = view as? UILabel {
-            for i in 0...17 {
-                label.text = "5"
-            }
+            label.text = pokemonTypeNames[index]
             return label
         }
         else {
@@ -202,7 +202,7 @@ extension ViewController: LTInfiniteScrollViewDataSource {
             label.textColor = UIColor.white
             label.layer.cornerRadius = size / 2
             label.layer.masksToBounds = true
-            label.text = "\(index)"
+            label.text = pokemonTypeNames[index]
             return label
         }
     }
