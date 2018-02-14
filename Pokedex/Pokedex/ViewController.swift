@@ -133,7 +133,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         attackPointsLab = UILabel(frame: CGRect(x: 0, y: attackPoints.frame.minY + (attackPoints.frame.height / 2) - 10, width: view.frame.width, height: 20))
         attackPointsLab.text = "0-200"
-        attackPointsLab.font = UIFont(name: "Pokemon Classic", size: 12.0)
+        attackPointsLab.font = UIFont(name: "Pokemon Classic", size: 10.0)
         attackPointsLab.textColor = .white
         attackPointsLab.frame = CGRect(x: view.frame.width - (attackPointsLab.intrinsicContentSize.width) - 15, y: attackPoints.frame.minY + (attackPoints.frame.height / 2) - 10, width: attackPointsLab.intrinsicContentSize.width, height: 20)
         view.addSubview(attackPointsLab)
@@ -180,10 +180,40 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         defensePointsLab = UILabel(frame: CGRect(x: 0, y: defensePoints.frame.minY + (defensePoints.frame.height / 2) - 10, width: view.frame.width, height: 20))
         defensePointsLab.text = "0-200"
-        defensePointsLab.font = UIFont(name: "Pokemon Classic", size: 12.0)
+        defensePointsLab.font = UIFont(name: "Pokemon Classic", size: 10.0)
         defensePointsLab.textColor = .white
         defensePointsLab.frame = CGRect(x: view.frame.width - (defensePointsLab.intrinsicContentSize.width) - 15, y: defensePoints.frame.minY + (defensePoints.frame.height / 2) - 10, width: defensePointsLab.intrinsicContentSize.width, height: 20)
         view.addSubview(defensePointsLab)
+        
+         defensePoints.addTarget(self, action: #selector(defensePointsPressed), for: .touchUpInside)
+    }
+    
+    func defensePointsPressed(sender: UIButton) {
+        let alertAction = UIAlertController(title: "Enter Minimum Defense Points", message: nil, preferredStyle: .alert)
+        alertAction.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alertAction.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Enter Minimum"
+        })
+        
+        alertAction.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
+            
+            let text = alertAction.textFields?.first?.text
+            let num = Int(text!)!
+            if num >= 0 && num <= 200 {
+                self.minDefense = Int(text!)!
+                self.defensePointsLab.text = text! + "-200"
+                self.resizeDefenseLabel()
+            }
+            else {
+                self.produceIntegerRangeError()
+            }
+        }))
+        self.present(alertAction, animated: true)
+    }
+    
+    func resizeDefenseLabel() {
+        defensePointsLab.frame = CGRect(x: view.frame.width - (defensePointsLab.intrinsicContentSize.width) - 15, y: defensePoints.frame.minY + (defensePoints.frame.height / 2) - 10, width: defensePointsLab.intrinsicContentSize.width, height: 20)
     }
     
     func initializeHealthPoints() {
@@ -196,10 +226,40 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         healthPointsLab = UILabel(frame: CGRect(x: 0, y: healthPoints.frame.minY + (healthPoints.frame.height / 2) - 10, width: view.frame.width, height: 20))
         healthPointsLab.text = "0-200"
-        healthPointsLab.font = UIFont(name: "Pokemon Classic", size: 12.0)
+        healthPointsLab.font = UIFont(name: "Pokemon Classic", size: 10.0)
         healthPointsLab.textColor = .white
         healthPointsLab.frame = CGRect(x: view.frame.width - (healthPointsLab.intrinsicContentSize.width) - 15, y: healthPoints.frame.minY + (healthPoints.frame.height / 2) - 10, width: healthPointsLab.intrinsicContentSize.width, height: 20)
         view.addSubview(healthPointsLab)
+        
+        healthPoints.addTarget(self, action: #selector(healthPointsPressed), for: .touchUpInside)
+    }
+    
+    func healthPointsPressed(sender: UIButton) {
+        let alertAction = UIAlertController(title: "Enter Minimum Health Points", message: nil, preferredStyle: .alert)
+        alertAction.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alertAction.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Enter Minimum"
+        })
+        
+        alertAction.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
+            
+            let text = alertAction.textFields?.first?.text
+            let num = Int(text!)!
+            if num >= 0 && num <= 200 {
+                self.minHealth = Int(text!)!
+                self.healthPointsLab.text = text! + "-200"
+                self.resizeHealthLabel()
+            }
+            else {
+                self.produceIntegerRangeError()
+            }
+        }))
+        self.present(alertAction, animated: true)
+    }
+    
+    func resizeHealthLabel() {
+        healthPointsLab.frame = CGRect(x: view.frame.width - (healthPointsLab.intrinsicContentSize.width) - 15, y: healthPoints.frame.minY + (healthPoints.frame.height / 2) - 10, width: healthPointsLab.intrinsicContentSize.width, height: 20)
     }
     
     func produceIntegerRangeError() {
