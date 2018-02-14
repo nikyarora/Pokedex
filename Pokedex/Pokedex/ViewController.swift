@@ -8,11 +8,7 @@
 
 import UIKit
 
-<<<<<<< HEAD
-class ViewController: UIViewController {
-    
-    var pokemons: [Pokemon] = PokemonGenerator.getPokemonArray()
-=======
+
 class ViewController: UIViewController, UISearchBarDelegate {
     //Pokemon Array
     var pokemon: [Pokemon] = PokemonGenerator.getPokemonArray()
