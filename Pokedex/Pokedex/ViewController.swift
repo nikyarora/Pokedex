@@ -38,7 +38,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var pokemonType: [UIImageView] = []
     var pokemonTypeNames = ["bug", "grass", "dark", "ground", "dragon", "ice", "electric", "normal", "fairy",
     "poison", "fighting", "psychic", "fire", "rock", "flying", "steel", "ghost", "water"]
->>>>>>> firstpage
 
     override func viewDidLoad() {
         
