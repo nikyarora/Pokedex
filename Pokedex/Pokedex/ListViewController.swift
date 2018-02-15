@@ -11,8 +11,8 @@ import UIKit
 class ListViewController: UIViewController {
     
     var segmentedControl: UISegmentedControl!
-    var pokemonCollectionView: UIPokemonCollectionView!
-    var pokemonTableView: UIPokemonTableView!
+    var pokemonCollectionView: UICollectionView!
+    var pokemonTableView: UITableView!
     var pokemonSelected: Pokemon!
     var pokemon: [Pokemon]!
 
@@ -42,10 +42,10 @@ class ListViewController: UIViewController {
     }
     
     func switchGridView() {
-        let layout = UIPokemonCollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        pokemonCollectionView = UIPokemonCollectionView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY + 30, width: view.frame.width, height: view.frame.height), pokemonCollectionViewLayout: layout)
+        pokemonCollectionView = UICollectionView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY + 30, width: view.frame.width, height: view.frame.height), collectionViewLayout: layout)
         pokemonCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "pokemonCell")
         pokemonCollectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10)
         pokemonCollectionView.backgroundColor = .white
@@ -55,7 +55,7 @@ class ListViewController: UIViewController {
     }
     
     func switchTableView() {
-        pokemonTableView = UIPokemonTableView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.minY, width: view.frame.width, height: view.frame.height))
+        pokemonTableView = UITableView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.minY, width: view.frame.width, height: view.frame.height))
         pokemonTableView.register(ListTableViewCell.self, forCellReuseIdentifier: "pokemonCell")
         pokemonTableView.delegate = self
         pokemonTableView.dataSource = self
@@ -63,6 +63,11 @@ class ListViewController: UIViewController {
         view.addSubview(pokemonTableView)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "..." {
+            //do something
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -88,19 +93,83 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         cell.awakeFromNib()
+        let pokemonInCell = pokemon[indexPath.row]
+        let imageURL = URL(string: pokemonInCell.imageUrl)
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: imageURL!)
+            DispatchQueue.main.async {
+                if let retrievedImage = data {
+                    cell.pokemonImage.image = UIImage(data: retrievedImage)
+                }
+                else {
+                    cell.pokemonImage.image = #imageLiteral(resourceName: "fire")
+                }
+            }
+        }
         
+        cell.pokemonName.text = pokemonInCell.name
+        cell.pokemonName.text = "#00\(pokemonInCell.number!)" + " " + cell.pokemonName.text!
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let cell = cell as! CollectionViewCell
-        cell.pokemonImage.image = UIImage(named: pokemon[indexPath.item])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width/3, height: view.frame.width/3 + 20)
+    }
+    
+    func collectionView(_ tableView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        pokemonSelected = pokemon[indexPath.row]
+        performSegue(withIdentifier: "...", sender: nil)
     }
     
 }
+
+extension ListViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return pokemon.count
+    }
+    
+    // Setting up cells
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell") as! ListTableViewCell
+        for subview in cell.contentView.subviews {
+            subview.removeFromSuperview() //remove stuff from cell before initializing
+        }
+        cell.awakeFromNib() //initialize cell
+        let pokemonInCell = pokemon[indexPath.row]
+        // retrieving images
+        let imageURL = URL(string: pokemonInCell.imageUrl)
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: imageURL!)
+            DispatchQueue.main.async {
+                if let imageRetrieved = data {
+                    cell.pokemonImageList.image = UIImage(data: imageRetrieved)
+                } else {
+                    cell.pokemonImageList.image = #imageLiteral(resourceName: "fire")
+                }
+            }
+        }
+        cell.pokemonNameList.text = pokemonInCell.name
+        cell.pokemonNameList.sizeToFit()
+        cell.pokemonNameList.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNameList.frame.height/2
+        cell.pokemonNameList.frame.origin.x = cell.pokemonImageList.frame.maxX + 10
+        cell.pokemonNameList.text = "#00\(pokemonInCell.number!)" + " " + cell.pokemonNameList.text!
+        cell.pokemonNumber.sizeToFit()
+        cell.pokemonNumber.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNumber.frame.height / 2
+        cell.pokemonNumber.frame.origin.x = view.frame.width - cell.pokemonNumber.frame.width - 15
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        pokemonSelected = pokemon[indexPath.row]
+        performSegue(withIdentifier: "...", sender: nil)
+    }
+}
+
 
