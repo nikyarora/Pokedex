@@ -32,6 +32,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var attributesLabel: UILabel!
     var typeLabel: UILabel!
     
+    //Attributes
     var minAttack: Int = 0
     var minDefense: Int = 0
     var minHealth: Int = 0
