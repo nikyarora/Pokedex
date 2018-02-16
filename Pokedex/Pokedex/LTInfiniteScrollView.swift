@@ -142,10 +142,11 @@ open class LTInfiniteScrollView: UIView {
     }
     
     fileprivate func reArrangeViews() {
-        print("here in rearrange views")
         var indexesNeeded = Set<Int>()
-        let begin = currentIndex - Int(ceil(Double(visibleViewCount) / 2.0))
-        let end = currentIndex + Int(ceil(Double(visibleViewCount) / 2.0))
+        let begin = currentIndex - 17
+        print(begin)
+        let end = currentIndex + 17
+        print(end)
         for i in begin...end {
             if i < 0 {
                 let index = end - i
@@ -186,7 +187,6 @@ open class LTInfiniteScrollView: UIView {
     }
     
     fileprivate func updateProgress() {
-        print("here in update progress")
         guard let delegate = delegate else {
             return
         }

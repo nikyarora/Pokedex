@@ -396,11 +396,6 @@ extension ViewController: LTInfiniteScrollViewDataSource {
             sender.setImage(UIImage(named: title!), for: .normal)
             print(selectedTypes)
         }
-        /**if sender.currentImage == #imageLiteral(resourceName: "fire") {
-            sender.setImage(#imageLiteral(resourceName: "fire_dim"), for: .normal)
-            selectedTypes.append(sender.currentTitle!)
-            print(selectedTypes[0])
-        }**/
     }
     
 }
