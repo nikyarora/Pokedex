@@ -26,6 +26,8 @@
 		9FF21BA320368FB9005F51DA /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF21BA120368F07005F51DA /* Lato-Light.ttf */; };
 		9FF21BA420368FB9005F51DA /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF21BA020368F06005F51DA /* Lato-Medium.ttf */; };
 		9FF21BA520368FB9005F51DA /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF21BA220368F07005F51DA /* Lato-Regular.ttf */; };
+		9FF21BA72036C851005F51DA /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF21BA62036C851005F51DA /* MyTabBarController.swift */; };
+		9FF21BA92036CA8A005F51DA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF21BA82036CA8A005F51DA /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		9FF21BA020368F06005F51DA /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
 		9FF21BA120368F07005F51DA /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		9FF21BA220368F07005F51DA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		9FF21BA62036C851005F51DA /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		9FF21BA82036CA8A005F51DA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,8 @@
 				01C38A532033C0A0004429AC /* LTInfiniteScrollView.swift */,
 				3CFC6F0E1D98716000B4EBB5 /* AppDelegate.swift */,
 				3CFC6F101D98716000B4EBB5 /* ViewController.swift */,
+				9FF21BA82036CA8A005F51DA /* FavoritesViewController.swift */,
+				9FF21BA62036C851005F51DA /* MyTabBarController.swift */,
 				01C38A552036212E004429AC /* ListViewController.swift */,
 				01C38A5920362393004429AC /* ListTableViewCell.swift */,
 				01C38A5720362183004429AC /* CollectionViewCell.swift */,
@@ -307,9 +313,11 @@
 				01C38A562036212E004429AC /* ListViewController.swift in Sources */,
 				01C38A5820362183004429AC /* CollectionViewCell.swift in Sources */,
 				01C38A542033C0A0004429AC /* LTInfiniteScrollView.swift in Sources */,
+				9FF21BA92036CA8A005F51DA /* FavoritesViewController.swift in Sources */,
 				9F888E1620366E8900954FAF /* ProfileViewController.swift in Sources */,
 				3CFC6F0F1D98716000B4EBB5 /* AppDelegate.swift in Sources */,
 				3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */,
+				9FF21BA72036C851005F51DA /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

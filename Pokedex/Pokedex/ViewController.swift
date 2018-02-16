@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController, UISearchBarDelegate {
+class ViewController: UIViewController {
     //Pokemon Array
     var pokemon: [Pokemon] = PokemonGenerator.getPokemonArray()
     
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func initializeSearch(){
         searchBar = UISearchBar()
-        searchBar.delegate = self
+        searchBar.delegate = self as? UISearchBarDelegate
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
         navigationController?.navigationBar.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
