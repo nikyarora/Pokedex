@@ -14,13 +14,12 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     var pokemonImage: UIImage!
     var myTabBarVC : MyTabBarController!
 
-    //let myVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
    
    // let homeScreen:ViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //myTabBarVC = tabBarController as! MyTabBarController
+        myTabBarVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyTabBarController") as! MyTabBarController
         initializeNavBar()
         initializeImage()
         initializeInfoAndStatsBar()
@@ -40,7 +39,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func addToFavorites() {
-       myTabBarVC.favorites.append(pokemon)
+        myTabBarVC.favorites.append(pokemon)
     }
     
     func initializeFavorite() {
