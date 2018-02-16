@@ -266,7 +266,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func produceIntegerRangeError() {
-        let alert = UIAlertController(title: "Error", message: "Please enter a valid integer between 0 and 200", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Error", message: "You must enter a valid integer between 0 and 200.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

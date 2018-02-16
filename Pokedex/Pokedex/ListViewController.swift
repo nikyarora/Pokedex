@@ -108,8 +108,8 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
         
-        cell.pokemonName.text = pokemonInCell.name
-        cell.pokemonName.text = "#00\(pokemonInCell.number!)" + " " + cell.pokemonName.text!
+        cell.pokemonName.text = pokemonInCell.name.replacingOccurrences(of: "  ", with: " ")
+        cell.pokemonName.text = "#\(pokemonInCell.number!)" + " " + cell.pokemonName.text!
         return cell
     }
     
@@ -119,7 +119,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width/3, height: view.frame.width/3 + 20)
+        return CGSize(width: view.frame.width/3 - 20, height: view.frame.width/3 + 30)
     }
     
     func collectionView(_ tableView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -158,7 +158,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
         cell.pokemonNameList.sizeToFit()
         cell.pokemonNameList.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNameList.frame.height/2
         cell.pokemonNameList.frame.origin.x = cell.pokemonImageList.frame.maxX + 10
-        cell.pokemonNameList.text = "#00\(pokemonInCell.number!)" + " " + cell.pokemonNameList.text!
+        cell.pokemonNameList.text = "#\(pokemonInCell.number!)" + " " + cell.pokemonNameList.text!
         cell.pokemonNumber.sizeToFit()
         cell.pokemonNumber.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNumber.frame.height / 2
         cell.pokemonNumber.frame.origin.x = view.frame.width - cell.pokemonNumber.frame.width - 15

@@ -25,11 +25,11 @@ class CollectionViewCell: UICollectionViewCell {
          pokemonName.clipsToBounds = true
         pokemonName.textColor = .black
         pokemonName.backgroundColor = .white
-        pokemonName.font = UIFont(name: "Pokemon Classic", size: 11.0)
+        pokemonName.font = UIFont(name: "Pokemon Classic", size: 9.0)
         
         contentView.addSubview(pokemonName)
         
-        pokemonCell = UIButton(frame: CGRect(x: 0, y: 0, width: contentView.frame.width-50, height: contentView.frame.height-10))
+        pokemonCell = UIButton(frame: CGRect(x: 0, y: 0, width: contentView.frame.width-50, height: contentView.frame.height-50))
         pokemonCell.backgroundColor = .white
         pokemonCell.sizeToFit()
         contentView.addSubview(pokemonCell)
