@@ -16,6 +16,7 @@ class MyTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nav = navigationItem
+        navigationController?.navigationBar.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
         let tabOne = ViewController()
         let image1 = UIImage(named: "Search")
         tabOne.tabBarItem = UITabBarItem(title: "Search", image: image1, tag: 0)
