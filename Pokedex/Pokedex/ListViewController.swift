@@ -103,7 +103,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     cell.pokemonImage.image = UIImage(data: retrievedImage)
                 }
                 else {
-                    cell.pokemonImage.image = #imageLiteral(resourceName: "fire")
+                    cell.pokemonImage.image = #imageLiteral(resourceName: "Pokeball")
                 }
             }
         }

@@ -23,6 +23,9 @@
 		3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */; };
 		3CFC6F411D9871FC00B4EBB5 /* PokemonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */; };
 		9F888E1620366E8900954FAF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F888E1520366E8900954FAF /* ProfileViewController.swift */; };
+		9FF21BA320368FB9005F51DA /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF21BA120368F07005F51DA /* Lato-Light.ttf */; };
+		9FF21BA420368FB9005F51DA /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF21BA020368F06005F51DA /* Lato-Medium.ttf */; };
+		9FF21BA520368FB9005F51DA /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF21BA220368F07005F51DA /* Lato-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonGenerator.swift; sourceTree = "<group>"; };
 		9F888E1520366E8900954FAF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9FF21BA020368F06005F51DA /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
+		9FF21BA120368F07005F51DA /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		9FF21BA220368F07005F51DA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,9 @@
 			isa = PBXGroup;
 			children = (
 				01C38A5120337662004429AC /* Pokemon Classic.ttf */,
+				9FF21BA120368F07005F51DA /* Lato-Light.ttf */,
+				9FF21BA020368F06005F51DA /* Lato-Medium.ttf */,
+				9FF21BA220368F07005F51DA /* Lato-Regular.ttf */,
 				3CFC6F3C1D98719100B4EBB5 /* pokeData.json */,
 				01C38A532033C0A0004429AC /* LTInfiniteScrollView.swift */,
 				3CFC6F0E1D98716000B4EBB5 /* AppDelegate.swift */,
@@ -260,6 +269,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FF21BA320368FB9005F51DA /* Lato-Light.ttf in Resources */,
+				9FF21BA420368FB9005F51DA /* Lato-Medium.ttf in Resources */,
+				9FF21BA520368FB9005F51DA /* Lato-Regular.ttf in Resources */,
 				3CFC6F191D98716000B4EBB5 /* LaunchScreen.storyboard in Resources */,
 				3CFC6F161D98716000B4EBB5 /* Assets.xcassets in Resources */,
 				01C38A522033766A004429AC /* Pokemon Classic.ttf in Resources */,

@@ -13,16 +13,51 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeNameLabel()
+        initializeName()
+        initializeImage()
+        initializeInfo()
+        initializeStats()
+        initializeSearch()
         // Do any additional setup after loading the view.
     }
     
-    func initializeNameLabel() {
-        var pokemonName = UILabel(frame: CGRect(x: 0, y: view.frame.height * 0.8, width: view.frame.width, height: view.frame.height * 0.2))
+    func initializeName() {
+        var pokemonName = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.2))
         pokemonName.text = pokemon.name
         view.addSubview(pokemonName)
     }
+    
+    func initializeFavorite() {
+        
+    }
+    
+    func initializeImage() {
+        var pokemonImage: UIImage!
+        let imageURL = URL(string: pokemon.imageUrl)
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: imageURL!)
+            DispatchQueue.main.async {
+                if let retrievedImage = data {
+                    pokemonImage = UIImage(data: retrievedImage)
+                }
+                else {
+                    pokemonImage = #imageLiteral(resourceName: "Pokeball")
+                }
+            }
+        }
+    }
+    
+    func initializeInfo() {
+        
+    }
+    
+    func initializeStats() {
+        
+    }
 
+    func initializeSearch() {
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
