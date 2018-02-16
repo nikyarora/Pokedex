@@ -131,6 +131,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
             sendPokemon = sendPokemon.sorted{$0.name < $1.name}
             listViewController.pokemon = self.sendPokemon
         }
+        if segue.identifier == "showProfileView" {
+            //let profileViewController = segue.destination.childViewControllers[0] as! ProfileViewController
+            //profileViewController.
+        }
     }
     
     func initializeAttackPoints() {
@@ -304,7 +308,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
             for pokemon in pokemon {
                 if pokemon.name.lowercased() == searchText.lowercased() || Int(searchText) == pokemon.number {
                     //pokemonDirectPass = pokemon
-                    performSegue(withIdentifier: "showListScreen", sender: self)
+                    //performSegue(withIdentifier: "showProfileView", sender: self)
                     return
                 } else if pokemon.name.lowercased().contains(searchText.lowercased()) {
                     //let pokemonTypeSet: Set<String> = Set(pokemon.types)

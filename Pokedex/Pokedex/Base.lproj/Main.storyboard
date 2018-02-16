@@ -25,6 +25,7 @@
                     <navigationItem key="navigationItem" id="IBs-X9-LnG"/>
                     <connections>
                         <segue destination="wBs-y6-5U9" kind="show" identifier="showListScreen" id="scX-u9-HcB"/>
+                        <segue destination="lT0-sR-Gp4" kind="show" id="d34-dc-9ny"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -89,4 +90,7 @@
             <point key="canvasLocation" x="-374" y="109"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="d34-dc-9ny"/>
+    </inferredMetricsTieBreakers>
 </document>
