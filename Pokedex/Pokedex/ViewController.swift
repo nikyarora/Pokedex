@@ -23,6 +23,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     //Buttons and Labels
     var randButton: UIButton!
+    var searchButton: UIButton!
     var attackPoints: UIButton!
     var attackPointsLab: UILabel!
     var defensePoints: UIButton!
@@ -88,6 +89,12 @@ class ViewController: UIViewController, UISearchBarDelegate {
         navigationController?.navigationBar.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchText = searchBar.text
+        print(searchText)
+        generateSearchWithText()
     }
     
     func initializeRandButton(){
@@ -288,6 +295,40 @@ class ViewController: UIViewController, UISearchBarDelegate {
             i = Int(arc4random_uniform(UInt32(pokemon.count)))
         }
         return i
+    }
+    
+    func generateSearchWithText() {
+        sendPokemon.removeAll()
+        if searchText != "" {
+            //let selectedTypesSet: Set<String> = Set(typesToSearch)
+            for pokemon in pokemon {
+                if pokemon.name.lowercased() == searchText.lowercased() || Int(searchText) == pokemon.number {
+                    //pokemonDirectPass = pokemon
+                    performSegue(withIdentifier: "showListScreen", sender: self)
+                    return
+                } else if pokemon.name.lowercased().contains(searchText.lowercased()) {
+                    //let pokemonTypeSet: Set<String> = Set(pokemon.types)
+                    //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth { //if pokemon's types fall under search types and stat conditions met
+                        sendPokemon.append(pokemon)
+                    //}
+                }
+            }
+            performSegue(withIdentifier: "showListScreen", sender: nil)
+        }
+        else {
+            //let selectedTypesSet: Set<String> = Set(typesToSearch)
+            for pokemon in pokemon {
+                //let pokemonTypeSet: Set<String> = Set(pokemon.types)
+                //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
+                    sendPokemon.append(pokemon)
+                //}
+            }
+            performSegue(withIdentifier: "showListScreen", sender: nil)
+        }
+    }
+    
+    func generateSearchWithButton() {
+        
     }
 
 }
