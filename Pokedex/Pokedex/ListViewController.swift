@@ -19,6 +19,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        switchTableView()
         createSegmentedControl()
     }
     
@@ -28,11 +29,11 @@ class ListViewController: UIViewController {
         segmentedControl.setWidth(80, forSegmentAt: 1)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.tintColor = .white
-        segmentedControl.addTarget(self, action: #selector(changeView), for: .valueChanged)
+        segmentedControl.addTarget(self, action: #selector(switchView), for: .valueChanged)
         navigationItem.titleView = segmentedControl
     }
     
-    func changeView() {
+    func switchView() {
         if segmentedControl.selectedSegmentIndex == 0 {
             switchTableView()
         }
@@ -64,7 +65,7 @@ class ListViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "..." {
+        if segue.identifier == "showProfileView" {
             //do something
         }
     }
@@ -113,7 +114,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let cell = cell as! CollectionViewCell
+        //let cell = cell as! CollectionViewCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -138,11 +139,10 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell") as! ListTableViewCell
         for subview in cell.contentView.subviews {
-            subview.removeFromSuperview() //remove stuff from cell before initializing
+            subview.removeFromSuperview()
         }
-        cell.awakeFromNib() //initialize cell
+        cell.awakeFromNib()
         let pokemonInCell = pokemon[indexPath.row]
-        // retrieving images
         let imageURL = URL(string: pokemonInCell.imageUrl)
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: imageURL!)

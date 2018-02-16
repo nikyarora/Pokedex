@@ -21,11 +21,11 @@ class CollectionViewCell: UICollectionViewCell {
         pokemonImage.clipsToBounds = true
         contentView.addSubview(pokemonImage)
         
-        pokemonName = UILabel(frame: CGRect(x: 0, y: contentView.frame.height * 0.8, width: contentView.frame.width, height: contentView.frame.height * 0.2))
+        pokemonName = UILabel(frame: CGRect(x: 0, y: contentView.frame.height * 0.9, width: contentView.frame.width, height: contentView.frame.height * 0.1))
          pokemonName.clipsToBounds = true
         pokemonName.textColor = .black
         pokemonName.backgroundColor = .white
-        pokemonName.font = UIFont(name: "Pokemon Classic", size: 8.0)
+        pokemonName.font = UIFont(name: "Pokemon Classic", size: 11.0)
         
         contentView.addSubview(pokemonName)
         
