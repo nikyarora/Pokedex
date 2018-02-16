@@ -123,7 +123,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ tableView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         pokemonSelected = pokemon[indexPath.row]
-        performSegue(withIdentifier: "...", sender: nil)
+        performSegue(withIdentifier: "showProfileView", sender: nil)
     }
     
 }
@@ -168,7 +168,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         pokemonSelected = pokemon[indexPath.row]
-        performSegue(withIdentifier: "...", sender: nil)
+        performSegue(withIdentifier: "showProfileView", sender: nil)
     }
 }
 

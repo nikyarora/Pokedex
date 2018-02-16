@@ -31,10 +31,10 @@
             </objects>
             <point key="canvasLocation" x="564" y="108"/>
         </scene>
-        <!--View Controller-->
+        <!--List View Controller-->
         <scene sceneID="tUZ-3R-0Tt">
             <objects>
-                <viewController id="wBs-y6-5U9" sceneMemberID="viewController">
+                <viewController id="wBs-y6-5U9" customClass="ListViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wOf-9n-mt5"/>
                         <viewControllerLayoutGuide type="bottom" id="GUS-5l-YOV"/>
@@ -44,10 +44,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="lT0-sR-Gp4" kind="show" identifier="showProfileView" id="CYk-La-w1D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oJ-oC-APx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1470" y="108"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1ux-Bv-aKE">
+            <objects>
+                <viewController id="lT0-sR-Gp4" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3D6-Zi-7Be"/>
+                        <viewControllerLayoutGuide type="bottom" id="TIP-B5-4I2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mxb-IR-csJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2l7-ax-HA2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2329" y="107"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="thZ-hu-LSW">

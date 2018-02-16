@@ -120,7 +120,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showListScreen" {
-            //send stuff
+            let listViewController = segue.destination as! ListViewController
+            sendPokemon = sendPokemon.sorted{$0.name < $1.name}
+            listViewController.pokemon = self.sendPokemon
         }
     }
     
@@ -271,13 +273,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func generateRandomPokemon() {
         sendPokemon.removeAll()
-        for i in 0...20 {
-            let rand = getRand(index: i)
+        for _ in 0..<20 {
+            let rand = getRand(index: Int(arc4random_uniform(UInt32(pokemon.count))))
             rands.append(rand)
             sendPokemon.append(pokemon[rand])
         }
         rands.removeAll()
-        performSegue(withIdentifier: "showListScreen", sender: randButton)
+        performSegue(withIdentifier: "showListScreen", sender: nil)
     }
     
     func getRand(index: Int) -> Int {
