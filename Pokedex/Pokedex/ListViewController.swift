@@ -64,8 +64,9 @@ class ListViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "..." {
-            //do something
+        if segue.identifier == "showProfileView" {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.pokemon = pokemonSelected
         }
     }
     
@@ -170,6 +171,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
         pokemonSelected = pokemon[indexPath.row]
         performSegue(withIdentifier: "showProfileView", sender: nil)
     }
+    
 }
 
 

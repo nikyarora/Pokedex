@@ -52,10 +52,10 @@
             </objects>
             <point key="canvasLocation" x="1470" y="108"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="1ux-Bv-aKE">
             <objects>
-                <viewController id="lT0-sR-Gp4" sceneMemberID="viewController">
+                <viewController id="lT0-sR-Gp4" customClass="ProfileViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3D6-Zi-7Be"/>
                         <viewControllerLayoutGuide type="bottom" id="TIP-B5-4I2"/>

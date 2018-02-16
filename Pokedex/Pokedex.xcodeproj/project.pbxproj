@@ -22,6 +22,7 @@
 		3CFC6F3D1D98719100B4EBB5 /* pokeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CFC6F3C1D98719100B4EBB5 /* pokeData.json */; };
 		3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */; };
 		3CFC6F411D9871FC00B4EBB5 /* PokemonGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */; };
+		9F888E1620366E8900954FAF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F888E1520366E8900954FAF /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		3CFC6F3C1D98719100B4EBB5 /* pokeData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokeData.json; sourceTree = "<group>"; };
 		3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonGenerator.swift; sourceTree = "<group>"; };
+		9F888E1520366E8900954FAF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				01C38A5920362393004429AC /* ListTableViewCell.swift */,
 				01C38A5720362183004429AC /* CollectionViewCell.swift */,
 				3CFC6F121D98716000B4EBB5 /* Main.storyboard */,
+				9F888E1520366E8900954FAF /* ProfileViewController.swift */,
 				3CFC6F151D98716000B4EBB5 /* Assets.xcassets */,
 				3CFC6F171D98716000B4EBB5 /* LaunchScreen.storyboard */,
 				3CFC6F1A1D98716000B4EBB5 /* Info.plist */,
@@ -292,6 +295,7 @@
 				01C38A562036212E004429AC /* ListViewController.swift in Sources */,
 				01C38A5820362183004429AC /* CollectionViewCell.swift in Sources */,
 				01C38A542033C0A0004429AC /* LTInfiniteScrollView.swift in Sources */,
+				9F888E1620366E8900954FAF /* ProfileViewController.swift in Sources */,
 				3CFC6F0F1D98716000B4EBB5 /* AppDelegate.swift in Sources */,
 				3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */,
 			);
