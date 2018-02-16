@@ -39,11 +39,15 @@ class ViewController: UIViewController {
     var minHealth: Int = 0
     
     //Type Scroll View
+    var directPokemon: Pokemon!
     let screenWidth = UIScreen.main.bounds.size.width
     var scrollView: LTInfiniteScrollView!
     var pokemonType: [UIImageView] = []
     var pokemonTypeNames = ["bug", "grass", "dark", "ground", "dragon", "ice", "electric", "normal", "fairy",
     "poison", "fighting", "psychic", "fire", "rock", "flying", "steel", "ghost", "water"]
+    var pokemonTypeImagesDim = [#imageLiteral(resourceName: "bug_dim"), #imageLiteral(resourceName: "grass_dim"), #imageLiteral(resourceName: "dark_dim"), #imageLiteral(resourceName: "ground_dim"), #imageLiteral(resourceName: "dragon_dim"), #imageLiteral(resourceName: "ice_dim"), #imageLiteral(resourceName: "electric_dim"), #imageLiteral(resourceName: "normal_dim"), #imageLiteral(resourceName: "fairy_dim"), #imageLiteral(resourceName: "poison_dim"), #imageLiteral(resourceName: "fighting_dim"), #imageLiteral(resourceName: "psychic_dim"), #imageLiteral(resourceName: "fire_dim"), #imageLiteral(resourceName: "rock_dim"), #imageLiteral(resourceName: "flying_dim"), #imageLiteral(resourceName: "steel_dim"), #imageLiteral(resourceName: "ghost_dim"), #imageLiteral(resourceName: "water_dim")]
+    var pokemonTypeImages = [#imageLiteral(resourceName: "bug"), #imageLiteral(resourceName: "grass"), #imageLiteral(resourceName: "dark"), #imageLiteral(resourceName: "ground"), #imageLiteral(resourceName: "dragon"), #imageLiteral(resourceName: "ice"), #imageLiteral(resourceName: "electric"), #imageLiteral(resourceName: "normal"), #imageLiteral(resourceName: "fairy"), #imageLiteral(resourceName: "poison"), #imageLiteral(resourceName: "fighting"), #imageLiteral(resourceName: "psychic"), #imageLiteral(resourceName: "fire"), #imageLiteral(resourceName: "rock"), #imageLiteral(resourceName: "flying"), #imageLiteral(resourceName: "steel"), #imageLiteral(resourceName: "ghost"), #imageLiteral(resourceName: "water")]
+    var selectedTypes: [String] = []
 
     override func viewDidLoad() {
         
@@ -51,6 +55,7 @@ class ViewController: UIViewController {
         
         initializeSearch()
         initializeRandButton()
+        initializeSearchButton()
         initializeScrollView()
         initializeTitleLabels()
         initializeAttackPoints()
@@ -107,6 +112,16 @@ class ViewController: UIViewController {
         view.addSubview(randButton)
     }
     
+    func initializeSearchButton() {
+        searchButton = UIButton(frame: CGRect(x: view.frame.width/2 + 10, y: view.frame.maxY - 75, width: (view.frame.width / 2) - 20, height: 50))
+        searchButton.layer.cornerRadius = 25
+        searchButton.setTitle("Search", for: .normal)
+        searchButton.titleLabel?.font = UIFont(name: "Pokemon Classic", size: 14.0)
+        searchButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
+        searchButton.addTarget(self, action: #selector(generateRandomPokemon), for: .touchUpInside)
+        view.addSubview(searchButton)
+    }
+    
     func initializeScrollView() {
         scrollView = LTInfiniteScrollView(frame: CGRect(x: 0, y: 175, width: view.frame.width + 2, height: 50))
         scrollView.dataSource = self
@@ -131,9 +146,9 @@ class ViewController: UIViewController {
             sendPokemon = sendPokemon.sorted{$0.name < $1.name}
             listViewController.pokemon = self.sendPokemon
         }
-        if segue.identifier == "showProfileView" {
-            //let profileViewController = segue.destination.childViewControllers[0] as! ProfileViewController
-            //profileViewController.
+        if segue.identifier == "seeProfile" {
+            let profileViewController = segue.destination.childViewControllers[0] as! ProfileViewController
+            profileViewController.pokemon = directPokemon
         }
     }
     
@@ -307,8 +322,8 @@ class ViewController: UIViewController {
             //let selectedTypesSet: Set<String> = Set(typesToSearch)
             for pokemon in pokemon {
                 if pokemon.name.lowercased() == searchText.lowercased() || Int(searchText) == pokemon.number {
-                    //pokemonDirectPass = pokemon
-                    //performSegue(withIdentifier: "showProfileView", sender: self)
+                    directPokemon = pokemon
+                    performSegue(withIdentifier: "seeProfile", sender: self)
                     return
                 } else if pokemon.name.lowercased().contains(searchText.lowercased()) {
                     //let pokemonTypeSet: Set<String> = Set(pokemon.types)
@@ -332,7 +347,14 @@ class ViewController: UIViewController {
     }
     
     func generateSearchWithButton() {
-        
+        //let selectedTypesSet: Set<String> = Set(typesToSearch)
+        for pokemon in pokemon {
+            //let pokemonTypeSet: Set<String> = Set(pokemon.types)
+            //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
+                sendPokemon.append(pokemon)
+            //}
+        }
+        performSegue(withIdentifier: "showListScreen", sender: nil)
     }
 
 }
@@ -340,21 +362,19 @@ class ViewController: UIViewController {
 extension ViewController: LTInfiniteScrollViewDataSource {
     
     func viewAtIndex(_ index: Int, reusingView view: UIView?) -> UIView {
-        if let label = view as? UILabel {
-            label.text = pokemonTypeNames[index]
-            return label
+        if let imageButton = view as? UIButton {
+            imageButton.setImage(pokemonTypeImages[index], for: .normal)
+            imageButton.setTitle(pokemonTypeNames[index], for: .normal)
+            imageButton.addTarget(self, action: #selector(typeSelected), for: .touchUpInside)
+            return imageButton
         }
         else {
             let size = screenWidth / CGFloat(numberOfVisibleViews())
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: size, height: size))
-            label.textAlignment = .center
-            label.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
-            label.font = UIFont(name: "Pokemon Classic", size: 11.0)
-            label.textColor = UIColor.white
-            label.layer.cornerRadius = size / 2
-            label.layer.masksToBounds = true
-            label.text = pokemonTypeNames[index]
-            return label
+            let imageButton = UIButton(frame: CGRect(x: 0, y: 0, width: size, height: size))
+            imageButton.setImage(pokemonTypeImages[index], for: .normal)
+            imageButton.setTitle(pokemonTypeNames[index], for: .normal)
+            imageButton.addTarget(self, action: #selector(typeSelected), for: .touchUpInside)
+            return imageButton
         }
     }
     
@@ -365,6 +385,29 @@ extension ViewController: LTInfiniteScrollViewDataSource {
     func numberOfVisibleViews() -> Int {
         return 5
     }
+    
+    func typeSelected(sender: UIButton!) {
+        var title = sender.currentTitle
+        if (title?.contains("_dim"))! {
+            title?.removeSubrange(title?.endIndex.advanced(by: -4)..<title?.endIndex)
+            sender.setTitle(title!, for: .normal)
+            sender.setImage(UIImage(named: title!), for: .normal)
+            let index = selectedTypes.index(of: title!)
+            selectedTypes.remove(at: index!)
+        } else {
+            selectedTypes.append(sender.currentTitle!)
+            title?.append("_dim")
+            sender.setTitle(title!, for: .normal)
+            sender.setImage(UIImage(named: title!), for: .normal)
+            print(selectedTypes)
+        }
+        /**if sender.currentImage == #imageLiteral(resourceName: "fire") {
+            sender.setImage(#imageLiteral(resourceName: "fire_dim"), for: .normal)
+            selectedTypes.append(sender.currentTitle!)
+            print(selectedTypes[0])
+        }**/
+    }
+    
 }
 
 extension ViewController: LTInfiniteScrollViewDelegate {

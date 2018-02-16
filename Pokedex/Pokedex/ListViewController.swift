@@ -146,13 +146,18 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
         let pokemonInCell = pokemon[indexPath.row]
         let imageURL = URL(string: pokemonInCell.imageUrl)
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: imageURL!)
-            DispatchQueue.main.async {
-                if let imageRetrieved = data {
-                    cell.pokemonImageList.image = UIImage(data: imageRetrieved)
-                } else {
-                    cell.pokemonImageList.image = #imageLiteral(resourceName: "fire")
+            if(imageURL != nil) {
+                let data = try? Data(contentsOf: imageURL!)
+                DispatchQueue.main.async {
+                    if let imageRetrieved = data {
+                        cell.pokemonImageList.image = UIImage(data: imageRetrieved)
+                    } else {
+                        cell.pokemonImageList.image = #imageLiteral(resourceName: "Pokeball")
+                    }
                 }
+            }
+            else {
+                cell.pokemonImageList.image = #imageLiteral(resourceName: "Pokeball")
             }
         }
         cell.pokemonNameList.text = pokemonInCell.name
