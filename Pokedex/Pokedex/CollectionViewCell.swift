@@ -17,7 +17,7 @@ class CollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         pokemonImage = UIImageView(frame: contentView.frame)
-        pokemonImage.contentMode = .scaleAspectFill
+        pokemonImage.contentMode = .scaleAspectFit
         pokemonImage.clipsToBounds = true
         contentView.addSubview(pokemonImage)
         
