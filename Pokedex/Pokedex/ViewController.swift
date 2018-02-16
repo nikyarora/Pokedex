@@ -67,7 +67,6 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         initializeHealthPoints()
         
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -125,7 +124,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         searchButton.setTitle("Search", for: .normal)
         searchButton.titleLabel?.font = UIFont(name: "Pokemon Classic", size: 14.0)
         searchButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
-        searchButton.addTarget(self, action: #selector(generateRandomPokemon), for: .touchUpInside)
+        searchButton.addTarget(self, action: #selector(generateSearchWithButton), for: .touchUpInside)
         view.addSubview(searchButton)
     }
     
@@ -342,16 +341,17 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func generateSearchWithButton() {
-        //let selectedTypesSet: Set<String> = Set(typesToSearch)
+        let selectedTypesSet: Set<String> = Set(selectedTypes)
+        print(selectedTypesSet)
         for pokemon in pokemon {
-            //let pokemonTypeSet: Set<String> = Set(pokemon.types)
-            //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
+            let pokemonTypeSet: Set<String> = Set(pokemon.types)
+            if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
                 myTabBarVC.sendPokemon.append(pokemon)
-            //}
+                print(pokemon)
+            }
         }
-        performSegue(withIdentifier: "showListScreen", sender: nil)
+        myTabBarVC.performSegue(withIdentifier: "showListScreen", sender: nil)
     }
-
 }
 
 extension ViewController: LTInfiniteScrollViewDataSource {
