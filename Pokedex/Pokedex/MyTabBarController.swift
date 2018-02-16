@@ -10,9 +10,12 @@ import UIKit
 
 class MyTabBarController: UITabBarController {
     var favorites : [Pokemon] = []
+    var nav : UINavigationItem!
+    var sendPokemon: [Pokemon]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nav = navigationItem
         let tabOne = ViewController()
         let image1 = UIImage(named: "Search")
         tabOne.tabBarItem = UITabBarItem(title: "Search", image: image1, tag: 0)
@@ -28,7 +31,13 @@ class MyTabBarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showListScreen" {
+            let listViewController = segue.destination as! ListViewController
+            sendPokemon = sendPokemon.sorted{$0.name < $1.name}
+            listViewController.pokemon = self.sendPokemon
+        }
+    }
     /*
     // MARK: - Navigation
 

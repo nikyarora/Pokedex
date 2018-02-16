@@ -88,8 +88,8 @@ open class LTInfiniteScrollView: UIView {
         views = [:]
         currentIndex = initialIndex
         scrollView.contentOffset = contentOffsetForIndex(currentIndex)
-        //reArrangeViews()
-        //updateProgress()
+        reArrangeViews()
+        updateProgress()
     }
     
     open func scrollToIndex(_ index: Int, animated: Bool) {
