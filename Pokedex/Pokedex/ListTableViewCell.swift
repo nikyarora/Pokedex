@@ -17,12 +17,12 @@ class ListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         pokemonImageList = UIImageView(frame: CGRect(x: 20, y: 10, width: 30, height: 30))
-        pokemonNameList = UILabel(frame: CGRect(x: 30, y: 0, width: 40, height: 40))
+        pokemonNameList = UILabel(frame: CGRect(x: 35, y: 0, width: 50, height: 50))
         pokemonNameList.textColor = .black
-        pokemonNameList.font = UIFont(name: "Pokemon Classic", size: 9.0)
-        pokemonNumber = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        pokemonNameList.font = UIFont(name: "Pokemon Classic", size: 11.0)
+        pokemonNumber = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         pokemonNumber.textColor = .black
-        pokemonNumber.font = UIFont(name: "Pokemon Classic", size: 9.0)
+        pokemonNumber.font = UIFont(name: "Pokemon Classic", size: 11.0)
         contentView.addSubview(pokemonImageList)
         contentView.addSubview(pokemonNameList)
         contentView.addSubview(pokemonNumber)

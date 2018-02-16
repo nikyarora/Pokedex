@@ -19,6 +19,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        switchTableView()
         createSegmentedControl()
     }
     
@@ -28,11 +29,11 @@ class ListViewController: UIViewController {
         segmentedControl.setWidth(80, forSegmentAt: 1)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.tintColor = .white
-        segmentedControl.addTarget(self, action: #selector(changeView), for: .valueChanged)
+        segmentedControl.addTarget(self, action: #selector(switchView), for: .valueChanged)
         navigationItem.titleView = segmentedControl
     }
     
-    func changeView() {
+    func switchView() {
         if segmentedControl.selectedSegmentIndex == 0 {
             switchTableView()
         }
@@ -108,18 +109,18 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         }
         
-        cell.pokemonName.text = pokemonInCell.name
-        cell.pokemonName.text = "#00\(pokemonInCell.number!)" + " " + cell.pokemonName.text!
+        cell.pokemonName.text = pokemonInCell.name.replacingOccurrences(of: "  ", with: " ")
+        cell.pokemonName.text = "#\(pokemonInCell.number!)" + " " + cell.pokemonName.text!
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let cell = cell as! CollectionViewCell
+        //let cell = cell as! CollectionViewCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width/3, height: view.frame.width/3 + 20)
+        return CGSize(width: view.frame.width/3 - 20, height: view.frame.width/3 + 30)
     }
     
     func collectionView(_ tableView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -139,11 +140,10 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell") as! ListTableViewCell
         for subview in cell.contentView.subviews {
-            subview.removeFromSuperview() //remove stuff from cell before initializing
+            subview.removeFromSuperview()
         }
-        cell.awakeFromNib() //initialize cell
+        cell.awakeFromNib()
         let pokemonInCell = pokemon[indexPath.row]
-        // retrieving images
         let imageURL = URL(string: pokemonInCell.imageUrl)
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: imageURL!)
@@ -159,7 +159,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
         cell.pokemonNameList.sizeToFit()
         cell.pokemonNameList.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNameList.frame.height/2
         cell.pokemonNameList.frame.origin.x = cell.pokemonImageList.frame.maxX + 10
-        cell.pokemonNameList.text = "#00\(pokemonInCell.number!)" + " " + cell.pokemonNameList.text!
+        cell.pokemonNameList.text = "#\(pokemonInCell.number!)" + " " + cell.pokemonNameList.text!
         cell.pokemonNumber.sizeToFit()
         cell.pokemonNumber.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNumber.frame.height / 2
         cell.pokemonNumber.frame.origin.x = view.frame.width - cell.pokemonNumber.frame.width - 15
