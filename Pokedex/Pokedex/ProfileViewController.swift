@@ -69,6 +69,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
                     self.pokemonImage = #imageLiteral(resourceName: "Pokeball")
                 }
                 self.pokemonImageView = UIImageView(frame: CGRect(x: 140, y: 80, width: 150, height: 200))
+                self.pokemonImageView.center = CGPoint(x: self.view.frame.width/2, y: 170)
                 self.pokemonImageView.image = self.pokemonImage
                 self.pokemonImageView.contentMode = .scaleAspectFit
                 self.pokemonImageView.clipsToBounds = true

@@ -100,13 +100,17 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let pokemonInCell = pokemon[indexPath.row]
         let imageURL = URL(string: pokemonInCell.imageUrl)
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: imageURL!) // problem with this line 
-            DispatchQueue.main.async {
-                if let retrievedImage = data {
-                    cell.pokemonImage.image = UIImage(data: retrievedImage)
-                }
-                else {
-                    cell.pokemonImage.image = #imageLiteral(resourceName: "Pokeball")
+            if imageURL == nil {
+                cell.pokemonImage.image = #imageLiteral(resourceName: "Pokeball")
+            } else {
+                let data = try? Data(contentsOf: imageURL!) // problem with this line
+                DispatchQueue.main.async {
+                    if let retrievedImage = data {
+                        cell.pokemonImage.image = UIImage(data: retrievedImage)
+                    }
+                    else {
+                        cell.pokemonImage.image = #imageLiteral(resourceName: "Pokeball")
+                    }
                 }
             }
         }
