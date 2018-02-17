@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pokedex/ProfileViewController.swift"
-            timestampString = "540519823.0413719"
+            timestampString = "540528606.6853369"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "addToFavorites()"
             landmarkType = "7">
          </BreakpointContent>

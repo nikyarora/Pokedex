@@ -13,7 +13,6 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     var pokemonImage: UIImage!
     var myTabBarVC : MyTabBarController!
 
-   
    // let homeScreen:ViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
 
     override func viewDidLoad() {
@@ -25,6 +24,9 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
         initializeInfoAndStatsBar()
         initializeStats()
         initializeWeb()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        initializeNavBar()
     }
     
     func initializeNavBar() {
@@ -39,11 +41,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func addToFavorites() {
-        myTabBarVC.favorites.append(myTabBarVC.pokemon)
-    }
-    
-    func initializeFavorite() {
-        
+        UserData.addToFavorites(name: myTabBarVC.pokemon.name)
     }
     
     func initializeImage() {
@@ -57,7 +55,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
                 else {
                     self.pokemonImage = #imageLiteral(resourceName: "Pokeball")
                 }
-                self.pokemonImageView = UIImageView(frame: CGRect(x: 140, y: 30, width: 150, height: 200))
+                self.pokemonImageView = UIImageView(frame: CGRect(x: 140, y: 80, width: 150, height: 200))
                 self.pokemonImageView.image = self.pokemonImage
                 self.pokemonImageView.contentMode = .scaleAspectFit
                 self.pokemonImageView.clipsToBounds = true
@@ -67,18 +65,18 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func initializeInfoAndStatsBar() {
-        var bar = UILabel(frame: CGRect(x: 0, y: 280, width: view.frame.width, height: 50))
+        var bar = UILabel(frame: CGRect(x: 0, y: 310, width: view.frame.width, height: 50))
         bar.backgroundColor = .black
         view.addSubview(bar)
         
-        var infoLabel = UILabel(frame: CGRect(x: 0, y: 280, width: view.frame.width/2, height: 50))
+        var infoLabel = UILabel(frame: CGRect(x: 0, y: 310, width: view.frame.width/2, height: 50))
         infoLabel.text = "INFO:"
         infoLabel.textColor = .white
         infoLabel.textAlignment = .center
         infoLabel.font = UIFont(name: "Lato-Regular", size: 26)
         view.addSubview(infoLabel)
         
-        var statsLabel = UILabel(frame: CGRect(x: view.frame.width/2, y: 280, width: view.frame.width/2, height: 50))
+        var statsLabel = UILabel(frame: CGRect(x: view.frame.width/2, y: 310, width: view.frame.width/2, height: 50))
         statsLabel.text = "STATS:"
         statsLabel.textColor = .white
         statsLabel.textAlignment = .center
@@ -114,25 +112,25 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
 
     func initializeStats() {
-        var HPLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 360, width: view.frame.width/2, height: 30))
+        var HPLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 370, width: view.frame.width/2, height: 30))
         HPLabel.text = "HP: \(myTabBarVC.pokemon.health!)"
 
-        var attackLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 395, width: view.frame.width/2, height: 30))
+        var attackLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 405, width: view.frame.width/2, height: 30))
         attackLabel.text = "Attack: \(myTabBarVC.pokemon.attack!)"
 
-        var defenseLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 430, width: view.frame.width/2, height: 30))
-        defenseLabel.text = "Attack: \(myTabBarVC.pokemon.defense!)"
+        var defenseLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 440, width: view.frame.width/2, height: 30))
+        defenseLabel.text = "Defense: \(myTabBarVC.pokemon.defense!)"
         
-        var spAtkLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 465, width: view.frame.width/2, height: 30))
+        var spAtkLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 475, width: view.frame.width/2, height: 30))
         spAtkLabel.text = "Sp. Def: \(myTabBarVC.pokemon.specialAttack!)"
         
-        var spDefLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 500, width: view.frame.width/2, height: 30))
+        var spDefLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 510, width: view.frame.width/2, height: 30))
         spDefLabel.text = "Sp. Atk: \(myTabBarVC.pokemon.specialDefense!)"
         
-        var speedLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 535, width: view.frame.width/2, height: 30))
+        var speedLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 545, width: view.frame.width/2, height: 30))
         speedLabel.text = "Speed: \(myTabBarVC.pokemon.speed!)"
         
-        var totalLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 570, width: view.frame.width/2, height: 30))
+        var totalLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 580, width: view.frame.width/2, height: 30))
         totalLabel.text = "Total: \(myTabBarVC.pokemon.total!)"
 
         for label in [HPLabel, attackLabel, defenseLabel, spAtkLabel, spDefLabel, speedLabel, totalLabel] {
@@ -142,7 +140,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
 
     func initializeWeb() {
-        var webButton = UIButton(frame: CGRect(x: 0, y: view.frame.height - 140, width: view.frame.width, height: 50))
+        var webButton = UIButton(frame: CGRect(x: 0, y: view.frame.height - 100, width: view.frame.width, height: 50))
         webButton.backgroundColor = .black
         webButton.setTitle("Search on the Web", for: .normal)
         webButton.titleLabel?.font = UIFont(name: "Lato-Regular", size: 26)

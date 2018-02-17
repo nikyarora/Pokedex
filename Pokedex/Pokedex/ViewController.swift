@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     
     //Pokemon Array
     var pokemon: [Pokemon] = PokemonGenerator.getPokemonArray()
+    var favorites: [Pokemon] = []
     
     //Random Pokemon
     var rands: [Int] = []

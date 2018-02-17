@@ -16,6 +16,7 @@ class ListViewController: UIViewController {
     var pokemonSelected: Pokemon!
     var pokemon: [Pokemon]!
 
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,11 +66,12 @@ class ListViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showProfileView" {
+        if segue.identifier == "showProfileView" { // favorites is not right by the point it gets here
             let myTabBarVC = segue.destination as! MyTabBarController
             myTabBarVC.pokemon = pokemonSelected
         }
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

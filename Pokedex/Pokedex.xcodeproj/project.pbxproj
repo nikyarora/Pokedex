@@ -28,6 +28,8 @@
 		9FF21BA520368FB9005F51DA /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF21BA220368F07005F51DA /* Lato-Regular.ttf */; };
 		9FF21BA72036C851005F51DA /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF21BA62036C851005F51DA /* MyTabBarController.swift */; };
 		9FF21BA92036CA8A005F51DA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF21BA82036CA8A005F51DA /* FavoritesViewController.swift */; };
+		9FF21BAB2037C36E005F51DA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF21BAA2037C36E005F51DA /* UserData.swift */; };
+		9FF21BAD2037C640005F51DA /* FavoritesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF21BAC2037C640005F51DA /* FavoritesListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		9FF21BA220368F07005F51DA /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		9FF21BA62036C851005F51DA /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		9FF21BA82036CA8A005F51DA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		9FF21BAA2037C36E005F51DA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		9FF21BAC2037C640005F51DA /* FavoritesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,12 +135,14 @@
 				9FF21BA220368F07005F51DA /* Lato-Regular.ttf */,
 				3CFC6F3C1D98719100B4EBB5 /* pokeData.json */,
 				01C38A532033C0A0004429AC /* LTInfiniteScrollView.swift */,
+				9FF21BAA2037C36E005F51DA /* UserData.swift */,
 				3CFC6F0E1D98716000B4EBB5 /* AppDelegate.swift */,
 				3CFC6F101D98716000B4EBB5 /* ViewController.swift */,
 				9FF21BA82036CA8A005F51DA /* FavoritesViewController.swift */,
 				9FF21BA62036C851005F51DA /* MyTabBarController.swift */,
 				01C38A552036212E004429AC /* ListViewController.swift */,
 				01C38A5920362393004429AC /* ListTableViewCell.swift */,
+				9FF21BAC2037C640005F51DA /* FavoritesListCell.swift */,
 				01C38A5720362183004429AC /* CollectionViewCell.swift */,
 				3CFC6F121D98716000B4EBB5 /* Main.storyboard */,
 				9F888E1520366E8900954FAF /* ProfileViewController.swift */,
@@ -313,7 +319,9 @@
 				01C38A562036212E004429AC /* ListViewController.swift in Sources */,
 				01C38A5820362183004429AC /* CollectionViewCell.swift in Sources */,
 				01C38A542033C0A0004429AC /* LTInfiniteScrollView.swift in Sources */,
+				9FF21BAB2037C36E005F51DA /* UserData.swift in Sources */,
 				9FF21BA92036CA8A005F51DA /* FavoritesViewController.swift in Sources */,
+				9FF21BAD2037C640005F51DA /* FavoritesListCell.swift in Sources */,
 				9F888E1620366E8900954FAF /* ProfileViewController.swift in Sources */,
 				3CFC6F0F1D98716000B4EBB5 /* AppDelegate.swift in Sources */,
 				3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */,

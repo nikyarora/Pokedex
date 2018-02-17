@@ -12,7 +12,8 @@ class MyTabBarController: UITabBarController {
     var favorites : [Pokemon] = []
     var pokemon : Pokemon!
     var nav : UINavigationItem!
-    
+    let defaults = UserDefaults.standard
+
     override func viewDidLoad() {
         super.viewDidLoad()
         nav = navigationItem
@@ -25,7 +26,28 @@ class MyTabBarController: UITabBarController {
         self.viewControllers = [tabOne, tabTwo]
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        defaults.set(favorites, forKey: "favorites")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        favorites = defaults.object(forKey: "favorites") as! [Pokemon]
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("Profile view disappear")
+        defaults.set(favorites, forKey: "favorites")
+    }
+    
+    /*override func viewWillDisappear(_ animated: Bool) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let subVC = storyboard.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+        print(favorites)
+        subVC.favorites = favorites
+        print(subVC.favorites)
+    }*/
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
