@@ -11,9 +11,9 @@ A segmented control that shows both a list view and collection view of the pokem
 
 ![Screen2](listview.jpeg)
 
-![Screen3](collectionview.png)
+![Screen3](collectionview.jpeg)
 
 # Screen 3:
 A tab bar view where users can see specific statistics for a Pokemon as well as add the Pokemon to a list of favorites.
 
-![Screen4](profileview.jpeg)
+![Screen4](profilescreen.jpeg)
