@@ -37,11 +37,24 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
         pokemonName.textAlignment = .center
         view.addSubview(pokemonName)
         myTabBarVC.nav.titleView = pokemonName;
-        myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addToFavorites))
+        if (UserData.faves == nil || !UserData.faves!.contains(myTabBarVC.pokemon.name)) {
+            myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addToFavorites))
+        } else {
+            myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "Remove", style: .plain, target: self, action: #selector(removeFromFavorites))
+        }
     }
     
     func addToFavorites() {
         UserData.addToFavorites(name: myTabBarVC.pokemon.name)
+        myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "Remove", style: .plain, target: self, action: #selector(removeFromFavorites))
+
+    }
+
+    func removeFromFavorites() {
+        UserData.removeFromFavorites(name: myTabBarVC.pokemon.name)
+        myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addToFavorites))
+
+
     }
     
     func initializeImage() {
