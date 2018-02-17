@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController, UITabBarControllerDelegate {
+class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarDelegate {
     
     //Pokemon Array
     var pokemon: [Pokemon] = PokemonGenerator.getPokemonArray()
@@ -103,9 +103,8 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         view.addGestureRecognizer(tap)
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar!) {
         searchText = searchBar.text
-        print(searchText)
         generateSearchWithText()
     }
     
@@ -315,30 +314,16 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     func generateSearchWithText() {
         sendPokemon.removeAll()
         if searchText != "" {
-            //let selectedTypesSet: Set<String> = Set(typesToSearch)
             for pokemon in pokemon {
                 if pokemon.name.lowercased() == searchText.lowercased() || Int(searchText) == pokemon.number {
                     directPokemon = pokemon
                     performSegue(withIdentifier: "seeProfile", sender: self)
                     return
-                } else if pokemon.name.lowercased().contains(searchText.lowercased()) {
-                    //let pokemonTypeSet: Set<String> = Set(pokemon.types)
-                    //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth { //if pokemon's types fall under search types and stat conditions met
-                        sendPokemon.append(pokemon)
-                    //}
                 }
             }
-            performSegue(withIdentifier: "showListScreen", sender: nil)
         }
         else {
-            //let selectedTypesSet: Set<String> = Set(typesToSearch)
-            for pokemon in pokemon {
-                //let pokemonTypeSet: Set<String> = Set(pokemon.types)
-                //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
-                    sendPokemon.append(pokemon)
-                //}
-            }
-            performSegue(withIdentifier: "showListScreen", sender: nil)
+            generateSearchWithButton()
         }
     }
     
@@ -376,6 +361,10 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
             let listViewController = segue.destination as! ListViewController
             sendPokemon = sendPokemon.sorted{$0.name < $1.name}
             listViewController.pokemon = self.sendPokemon
+        }
+        if segue.identifier == "seeProfile" {
+            let tabView = segue.destination as! MyTabBarController
+            tabView.pokemon = directPokemon
         }
     }
 
