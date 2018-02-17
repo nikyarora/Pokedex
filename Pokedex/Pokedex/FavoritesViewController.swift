@@ -67,8 +67,8 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
         cell.awakeFromNib()
         let pokemonInCell = UserData.faves![indexPath.row]
         cell.pokemonNameList.text = pokemonInCell
-        cell.pokemonNameList.sizeToFit()
         cell.pokemonNameList.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNameList.frame.height/2
+        cell.pokemonNameList.sizeToFit()
         return cell
     }
     

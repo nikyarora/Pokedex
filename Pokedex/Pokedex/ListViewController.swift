@@ -164,7 +164,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
         }
         cell.pokemonNameList.frame.size.width = 300
         cell.pokemonNameList.text = pokemonInCell.name
-        cell.pokemonNameList.sizeToFit()
+        
         cell.pokemonNameList.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNameList.frame.height/2
         cell.pokemonNameList.frame.origin.x = cell.pokemonImageList.frame.maxX + 10
         cell.pokemonNameList.text = "#\(pokemonInCell.number!)" + " " + cell.pokemonNameList.text!
