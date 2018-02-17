@@ -162,6 +162,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.pokemonImageList.image = #imageLiteral(resourceName: "Pokeball")
             }
         }
+        cell.pokemonNameList.frame.size.width = 300
         cell.pokemonNameList.text = pokemonInCell.name
         cell.pokemonNameList.sizeToFit()
         cell.pokemonNameList.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNameList.frame.height/2

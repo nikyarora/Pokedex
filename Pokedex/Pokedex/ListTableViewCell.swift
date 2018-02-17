@@ -17,7 +17,7 @@ class ListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         pokemonImageList = UIImageView(frame: CGRect(x: 20, y: 10, width: 30, height: 30))
-        pokemonNameList = UILabel(frame: CGRect(x: 35, y: 0, width: 50, height: 50))
+        pokemonNameList = UILabel(frame: CGRect(x: 35, y: 0, width: 300, height: 50))
         pokemonNameList.textColor = .black
         pokemonNameList.font = UIFont(name: "Pokemon Classic", size: 11.0)
         pokemonNumber = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))

@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     //Search Variables
     var searchBar: UISearchBar!
     var searchText: String!
+    var searched: [Int] = []
     
     //Buttons and Labels
     var randButton: UIButton!
@@ -73,8 +74,10 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        selectedTypes.removeAll()
         scrollView.reloadData(initialIndex: 0)
     }
+    
     
     func initializeTitleLabels() {
         typeLabel = UILabel(frame: CGRect(x: 15, y: (navigationController?.navigationBar.frame.maxY)! + 10, width: view.frame.width, height: 50))
@@ -269,6 +272,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
             let num = Int(text!)!
             if num >= 0 && num <= 200 {
                 self.minHealth = Int(text!)!
+                print(self.minHealth)
                 self.healthPointsLab.text = text! + "-200"
                 self.resizeHealthLabel()
             }
@@ -339,16 +343,32 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func generateSearchWithButton() {
-        let selectedTypesSet: Set<String> = Set(selectedTypes)
-        print(selectedTypesSet)
-        for pokemon in pokemon {
-            let pokemonTypeSet: Set<String> = Set(pokemon.types)
-            if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
-                sendPokemon.append(pokemon)
-                print(pokemon)
-            }
+        if minAttack == 0 && minHealth == 0 && minDefense == 0 && selectedTypes.isEmpty {
+            sendPokemon = PokemonGenerator.getPokemonArray()
+            performSegue(withIdentifier: "showListScreen", sender: nil)
         }
-        performSegue(withIdentifier: "showListScreen", sender: nil)
+        else {
+            sendPokemon.removeAll()
+            //let typesSelected: Set<String> = Set(selectedTypes)
+            for pokemon in pokemon {
+                if pokemon.attack >= minAttack && pokemon.defense >= minDefense && pokemon.health >= minHealth {
+                    if selectedTypes.isEmpty {
+                        sendPokemon.append(pokemon)
+                    }
+                    else {
+                        for type in selectedTypes {
+                            print(pokemon.types.contains(type))
+                            for typePokemon in pokemon.types {
+                                if typePokemon.lowercased() == type {
+                                    sendPokemon.append(pokemon)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            performSegue(withIdentifier: "showListScreen", sender: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -358,6 +378,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
             listViewController.pokemon = self.sendPokemon
         }
     }
+
 }
 
 extension ViewController: LTInfiniteScrollViewDataSource {
@@ -430,7 +451,7 @@ extension ViewController: LTInfiniteScrollViewDelegate {
     }
     
     func scrollViewDidScrollToIndex(_ scrollView: LTInfiniteScrollView, index: Int) {
-        print("scroll to index: \(index)")
+        //print("scroll to index: \(index)")
     }
 }
 
