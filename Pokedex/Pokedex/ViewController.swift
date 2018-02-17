@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     
     //Pokemon Array
     var pokemon: [Pokemon] = PokemonGenerator.getPokemonArray()
+    var favorites: [Pokemon] = []
     
     //Random Pokemon
     var rands: [Int] = []
@@ -365,11 +366,6 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
                         }
                     }
                 }
-                //let allPokemon: Set<String> = Set(pokemon.types)
-                //if typesSelected.intersection(allPokemon).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
-                    //sendPokemon.append(pokemon)
-                    //print(pokemon)
-                //}
             }
             performSegue(withIdentifier: "showListScreen", sender: nil)
         }

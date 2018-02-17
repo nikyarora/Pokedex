@@ -35,7 +35,7 @@
         <!--List View Controller-->
         <scene sceneID="tUZ-3R-0Tt">
             <objects>
-                <viewController id="wBs-y6-5U9" customClass="ListViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListViewController" id="wBs-y6-5U9" customClass="ListViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wOf-9n-mt5"/>
                         <viewControllerLayoutGuide type="bottom" id="GUS-5l-YOV"/>

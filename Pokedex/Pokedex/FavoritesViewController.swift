@@ -12,6 +12,7 @@ class FavoritesViewController: UIViewController, UITabBarControllerDelegate {
     
     var pokemonTableView: UITableView!
     var myTabBarVC : MyTabBarController!
+    var favesLabel : UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,17 +20,27 @@ class FavoritesViewController: UIViewController, UITabBarControllerDelegate {
         loadLayout()
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-        print(myTabBarVC.favorites)
+    override func viewDidAppear(_ animated: Bool) {
         loadLayout()
+        favesLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
+        favesLabel.text = "Favorites"
+        favesLabel.font = UIFont(name: "Lato-Regular", size: 26)
+        favesLabel.textAlignment = .center
+        view.addSubview(favesLabel)
+        myTabBarVC.nav.titleView = favesLabel;
+        print("didAppear")
+        myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     func loadLayout() {
         pokemonTableView = UITableView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.minY, width: view.frame.width, height: view.frame.height))
-        pokemonTableView.register(ListTableViewCell.self, forCellReuseIdentifier: "pokemonCell")
+        pokemonTableView.register(FavoritesListCell.self, forCellReuseIdentifier: "pokemonCell")
         pokemonTableView.delegate = self as! UITableViewDelegate
         pokemonTableView.dataSource = self as! UITableViewDataSource
         pokemonTableView.rowHeight = 50
         view.addSubview(pokemonTableView)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        favesLabel.removeFromSuperview()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,41 +52,23 @@ class FavoritesViewController: UIViewController, UITabBarControllerDelegate {
 extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate{
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myTabBarVC.favorites.count
+        if UserData.faves == nil {
+            return 0
+        }
+        return UserData.faves!.count
     }
     
     // Setting up cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell") as! ListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell") as! FavoritesListCell
         for subview in cell.contentView.subviews {
             subview.removeFromSuperview()
         }
         cell.awakeFromNib()
-        let pokemonInCell = myTabBarVC.favorites[indexPath.row]
-        let imageURL = URL(string: pokemonInCell.imageUrl)
-        DispatchQueue.global().async {
-            if(imageURL != nil) {
-                let data = try? Data(contentsOf: imageURL!)
-                DispatchQueue.main.async {
-                    if let imageRetrieved = data {
-                        cell.pokemonImageList.image = UIImage(data: imageRetrieved)
-                    } else {
-                        cell.pokemonImageList.image = #imageLiteral(resourceName: "Pokeball")
-                    }
-                }
-            }
-            else {
-                cell.pokemonImageList.image = #imageLiteral(resourceName: "Pokeball")
-            }
-        }
-        cell.pokemonNameList.text = pokemonInCell.name
+        let pokemonInCell = UserData.faves![indexPath.row]
+        cell.pokemonNameList.text = pokemonInCell
         cell.pokemonNameList.sizeToFit()
         cell.pokemonNameList.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNameList.frame.height/2
-        cell.pokemonNameList.frame.origin.x = cell.pokemonImageList.frame.maxX + 10
-        cell.pokemonNameList.text = "#\(pokemonInCell.number!)" + " " + cell.pokemonNameList.text!
-        cell.pokemonNumber.sizeToFit()
-        cell.pokemonNumber.frame.origin.y = tableView.rowHeight / 2 - cell.pokemonNumber.frame.height / 2
-        cell.pokemonNumber.frame.origin.x = view.frame.width - cell.pokemonNumber.frame.width - 15
         return cell
     }
     
