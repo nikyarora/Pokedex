@@ -44,6 +44,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
     
     //Type Scroll View
     var directPokemon: Pokemon!
+    var move = false
     let screenWidth = UIScreen.main.bounds.size.width
     var scrollView: LTInfiniteScrollView!
     var pokemonType: [UIImageView] = []
@@ -105,6 +106,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar!) {
         searchText = searchBar.text
+        print("here")
         generateSearchWithText()
     }
     
@@ -320,6 +322,13 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
                     performSegue(withIdentifier: "seeProfile", sender: self)
                     return
                 }
+                else if pokemon.name.lowercased().contains(searchText.lowercased()) {
+                        sendPokemon.append(pokemon)
+                        move = true
+                    }
+                }
+            if move{
+                performSegue(withIdentifier: "showListScreen", sender: nil)
             }
         }
         else {
