@@ -144,9 +144,9 @@ open class LTInfiniteScrollView: UIView {
     fileprivate func reArrangeViews() {
         var indexesNeeded = Set<Int>()
         let begin = currentIndex - 17
-        print(begin)
+        //print(begin)
         let end = currentIndex + 17
-        print(end)
+        //print(end)
         for i in begin...end {
             if i < 0 {
                 let index = end - i
