@@ -9,7 +9,6 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITabBarControllerDelegate {
-    var pokemon : Pokemon!
     var pokemonImageView: UIImageView!
     var pokemonImage: UIImage!
     var myTabBarVC : MyTabBarController!
@@ -19,7 +18,8 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        myTabBarVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyTabBarController") as! MyTabBarController
+        view.backgroundColor = .white
+        myTabBarVC = tabBarController as! MyTabBarController
         initializeNavBar()
         initializeImage()
         initializeInfoAndStatsBar()
@@ -30,16 +30,16 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     func initializeNavBar() {
         edgesForExtendedLayout = []
         var pokemonName = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
-        pokemonName.text = pokemon.name
+        pokemonName.text = myTabBarVC.pokemon.name
         pokemonName.font = UIFont(name: "Lato-Regular", size: 26)
         pokemonName.textAlignment = .center
         view.addSubview(pokemonName)
-        navigationItem.titleView = pokemonName;
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addToFavorites))
+        myTabBarVC.nav.titleView = pokemonName;
+        myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addToFavorites))
     }
     
     func addToFavorites() {
-        myTabBarVC.favorites.append(pokemon)
+        myTabBarVC.favorites.append(myTabBarVC.pokemon)
     }
     
     func initializeFavorite() {
@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func initializeImage() {
-        let imageURL = URL(string: pokemon.imageUrl)
+        let imageURL = URL(string: myTabBarVC.pokemon.imageUrl)
         DispatchQueue.global(qos: .userInitiated).async {
             let data = try? Data(contentsOf: imageURL!)
             DispatchQueue.main.async {
@@ -90,15 +90,15 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     
     func initializeInfo() {
         var numberLabel = UILabel(frame: CGRect(x: 20, y: 360, width: view.frame.width/2 - 20, height: 70))
-        numberLabel.text = "Number: \(pokemon.number!)"
+        numberLabel.text = "Number: \(myTabBarVC.pokemon.number!)"
         numberLabel.font = UIFont(name: "Pokemon Classic", size: 16)
         view.addSubview(numberLabel)
         
         var typeLabel = UILabel(frame: CGRect(x: 20, y: 440, width: view.frame.width/2 - 20, height: 70))
-        if (pokemon.types.count > 1) {
-            typeLabel.text = "Type: \(pokemon.types[0] + ", " + pokemon.types[1])"
+        if (myTabBarVC.pokemon.types.count > 1) {
+            typeLabel.text = "Type: \(myTabBarVC.pokemon.types[0] + ", " + myTabBarVC.pokemon.types[1])"
         } else {
-            typeLabel.text = "Type: \(pokemon.types[0])"
+            typeLabel.text = "Type: \(myTabBarVC.pokemon.types[0])"
         }
         typeLabel.lineBreakMode = .byWordWrapping
         typeLabel.numberOfLines = 2
@@ -106,7 +106,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
         view.addSubview(typeLabel)
         
         var speciesLabel = UILabel(frame: CGRect(x: 20, y: 520, width: view.frame.width/2 - 20, height: 70))
-        speciesLabel.text = "Species: \(pokemon.species!)"
+        speciesLabel.text = "Species: \(myTabBarVC.pokemon.species!)"
         speciesLabel.lineBreakMode = .byWordWrapping
         speciesLabel.numberOfLines = 3
         speciesLabel.font = UIFont(name: "Pokemon Classic", size: 16)
@@ -115,25 +115,25 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
 
     func initializeStats() {
         var HPLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 360, width: view.frame.width/2, height: 30))
-        HPLabel.text = "HP: \(pokemon.health!)"
+        HPLabel.text = "HP: \(myTabBarVC.pokemon.health!)"
 
         var attackLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 395, width: view.frame.width/2, height: 30))
-        attackLabel.text = "Attack: \(pokemon.attack!)"
+        attackLabel.text = "Attack: \(myTabBarVC.pokemon.attack!)"
 
         var defenseLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 430, width: view.frame.width/2, height: 30))
-        defenseLabel.text = "Attack: \(pokemon.defense!)"
+        defenseLabel.text = "Attack: \(myTabBarVC.pokemon.defense!)"
         
         var spAtkLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 465, width: view.frame.width/2, height: 30))
-        spAtkLabel.text = "Sp. Def: \(pokemon.specialAttack!)"
+        spAtkLabel.text = "Sp. Def: \(myTabBarVC.pokemon.specialAttack!)"
         
         var spDefLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 500, width: view.frame.width/2, height: 30))
-        spDefLabel.text = "Sp. Atk: \(pokemon.specialDefense!)"
+        spDefLabel.text = "Sp. Atk: \(myTabBarVC.pokemon.specialDefense!)"
         
         var speedLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 535, width: view.frame.width/2, height: 30))
-        speedLabel.text = "Speed: \(pokemon.speed!)"
+        speedLabel.text = "Speed: \(myTabBarVC.pokemon.speed!)"
         
         var totalLabel = UILabel(frame: CGRect(x: view.frame.width/2 + 20, y: 570, width: view.frame.width/2, height: 30))
-        totalLabel.text = "Total: \(pokemon.total!)"
+        totalLabel.text = "Total: \(myTabBarVC.pokemon.total!)"
 
         for label in [HPLabel, attackLabel, defenseLabel, spAtkLabel, spDefLabel, speedLabel, totalLabel] {
             label.font = UIFont(name: "Pokemon Classic", size: 14)
@@ -153,7 +153,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func performSearch() {
-        if let url = URL(string: "https://google.com/search?q=" + pokemon.name!) {
+        if let url = URL(string: "https://google.com/search?q=" + myTabBarVC.pokemon.name!) {
             UIApplication.shared.open(url, options: [:])
         }
     }

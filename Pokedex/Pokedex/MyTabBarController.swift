@@ -10,15 +10,15 @@ import UIKit
 
 class MyTabBarController: UITabBarController {
     var favorites : [Pokemon] = []
+    var pokemon : Pokemon!
     var nav : UINavigationItem!
-    var sendPokemon: [Pokemon]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nav = navigationItem
-        let tabOne = ViewController()
+        let tabOne = ProfileViewController()
         let image1 = UIImage(named: "Search")
-        tabOne.tabBarItem = UITabBarItem(title: "Search", image: image1, tag: 0)
+        tabOne.tabBarItem = UITabBarItem(title: "Pokemon", image: image1, tag: 0)
         let tabTwo = FavoritesViewController()
         let image2 = UIImage(named: "Favorites")
         tabTwo.tabBarItem = UITabBarItem(title: "Favorites", image: image2, tag: 1)
@@ -29,14 +29,6 @@ class MyTabBarController: UITabBarController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showListScreen" {
-            let listViewController = segue.destination as! ListViewController
-            sendPokemon = sendPokemon.sorted{$0.name < $1.name}
-            listViewController.pokemon = self.sendPokemon
-        }
     }
     /*
     // MARK: - Navigation

@@ -15,7 +15,7 @@ class FavoritesViewController: UIViewController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        myTabBarVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MyTabBarController") as! MyTabBarController
+        myTabBarVC = tabBarController as! MyTabBarController
         loadLayout()
         // Do any additional setup after loading the view.
     }

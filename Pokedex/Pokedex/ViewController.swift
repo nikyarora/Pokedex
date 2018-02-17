@@ -10,14 +10,14 @@ import UIKit
 
 
 class ViewController: UIViewController, UITabBarControllerDelegate {
-    // TabBar Controller
-    var myTabBarVC : MyTabBarController!
     
     //Pokemon Array
     var pokemon: [Pokemon] = PokemonGenerator.getPokemonArray()
     
     //Random Pokemon
     var rands: [Int] = []
+    var sendPokemon = PokemonGenerator.getPokemonArray()
+
     
     //Search Variables
     var searchBar: UISearchBar!
@@ -54,9 +54,6 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myTabBarVC = tabBarController as! MyTabBarController
-        myTabBarVC.sendPokemon = PokemonGenerator.getPokemonArray()
-        view.backgroundColor = .white
         initializeSearch()
         initializeRandButton()
         initializeSearchButton()
@@ -96,7 +93,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         searchBar = UISearchBar()
         searchBar.delegate = self as? UISearchBarDelegate
         searchBar.sizeToFit()
-        myTabBarVC.nav.titleView = searchBar
+        navigationItem.titleView = searchBar
         navigationController?.navigationBar.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -292,14 +289,14 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func generateRandomPokemon() {
-        myTabBarVC.sendPokemon.removeAll()
+        sendPokemon.removeAll()
         for _ in 0..<20 {
             let rand = getRand(index: Int(arc4random_uniform(UInt32(pokemon.count))))
             rands.append(rand)
-            myTabBarVC.sendPokemon.append(pokemon[rand])
+            sendPokemon.append(pokemon[rand])
         }
         rands.removeAll()
-        myTabBarVC.performSegue(withIdentifier: "showListScreen", sender: nil)
+        performSegue(withIdentifier: "showListScreen", sender: nil)
     }
     
     func getRand(index: Int) -> Int {
@@ -311,7 +308,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
     }
     
     func generateSearchWithText() {
-        myTabBarVC.sendPokemon.removeAll()
+        sendPokemon.removeAll()
         if searchText != "" {
             //let selectedTypesSet: Set<String> = Set(typesToSearch)
             for pokemon in pokemon {
@@ -322,7 +319,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
                 } else if pokemon.name.lowercased().contains(searchText.lowercased()) {
                     //let pokemonTypeSet: Set<String> = Set(pokemon.types)
                     //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth { //if pokemon's types fall under search types and stat conditions met
-                        myTabBarVC.sendPokemon.append(pokemon)
+                        sendPokemon.append(pokemon)
                     //}
                 }
             }
@@ -333,7 +330,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
             for pokemon in pokemon {
                 //let pokemonTypeSet: Set<String> = Set(pokemon.types)
                 //if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
-                    myTabBarVC.sendPokemon.append(pokemon)
+                    sendPokemon.append(pokemon)
                 //}
             }
             performSegue(withIdentifier: "showListScreen", sender: nil)
@@ -346,11 +343,19 @@ class ViewController: UIViewController, UITabBarControllerDelegate {
         for pokemon in pokemon {
             let pokemonTypeSet: Set<String> = Set(pokemon.types)
             if selectedTypesSet.intersection(pokemonTypeSet).count > 0 && pokemon.attack >= minAttack && pokemon.defense > minDefense && pokemon.health > minHealth {
-                myTabBarVC.sendPokemon.append(pokemon)
+                sendPokemon.append(pokemon)
                 print(pokemon)
             }
         }
-        myTabBarVC.performSegue(withIdentifier: "showListScreen", sender: nil)
+        performSegue(withIdentifier: "showListScreen", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showListScreen" {
+            let listViewController = segue.destination as! ListViewController
+            sendPokemon = sendPokemon.sorted{$0.name < $1.name}
+            listViewController.pokemon = self.sendPokemon
+        }
     }
 }
 
