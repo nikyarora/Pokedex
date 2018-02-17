@@ -28,7 +28,6 @@ class FavoritesViewController: UIViewController, UITabBarControllerDelegate {
         favesLabel.textAlignment = .center
         view.addSubview(favesLabel)
         myTabBarVC.nav.titleView = favesLabel;
-        print("didAppear")
         myTabBarVC.nav.rightBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     func loadLayout() {

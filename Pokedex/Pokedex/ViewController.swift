@@ -100,33 +100,32 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
         searchBar.delegate = self as? UISearchBarDelegate
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
-        navigationController?.navigationBar.backgroundColor = UIColor(red:0.55, green:0.58, blue:0.25, alpha:1.0)
+        navigationController?.navigationBar.backgroundColor = UIColor(red:0.93, green:0.08, blue:0.08, alpha:1.0)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar!) {
         searchText = searchBar.text
-        print("here")
         generateSearchWithText()
     }
     
     func initializeRandButton(){
-        randButton = UIButton(frame: CGRect(x: 20, y: view.frame.maxY - 110, width: (view.frame.width / 2) - 20, height: 50))
-        randButton.layer.cornerRadius = 25
+        randButton = UIButton(frame: CGRect(x: 10, y: view.frame.maxY - 110, width: (view.frame.width / 2) - 20, height: 50))
+        //randButton.layer.cornerRadius = 25
         randButton.setTitle("Random", for: .normal)
         randButton.titleLabel?.font = UIFont(name: "Pokemon Classic", size: 14.0)
-        randButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
+        randButton.backgroundColor = UIColor(red:0.93, green:0.08, blue:0.08, alpha:1.0)
         randButton.addTarget(self, action: #selector(generateRandomPokemon), for: .touchUpInside)
         view.addSubview(randButton)
     }
     
     func initializeSearchButton() {
         searchButton = UIButton(frame: CGRect(x: view.frame.width/2 + 10, y: view.frame.maxY - 110, width: (view.frame.width / 2) - 20, height: 50))
-        searchButton.layer.cornerRadius = 25
+        //searchButton.layer.cornerRadius = 25
         searchButton.setTitle("Search", for: .normal)
         searchButton.titleLabel?.font = UIFont(name: "Pokemon Classic", size: 14.0)
-        searchButton.backgroundColor = UIColor(red:0.42, green:0.71, blue:0.90, alpha:1.0)
+        searchButton.backgroundColor = UIColor(red:0.93, green:0.08, blue:0.08, alpha:1.0)
         searchButton.addTarget(self, action: #selector(generateSearchWithButton), for: .touchUpInside)
         view.addSubview(searchButton)
     }
@@ -151,8 +150,8 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
     
     func initializeAttackPoints() {
        attackPoints = UIButton(frame: CGRect(x:0, y:attributesLabel.frame.maxY + 10, width: view.frame.width, height: 50))
-        attackPoints.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
-        attackPoints.layer.cornerRadius = 25
+        attackPoints.backgroundColor = UIColor(red:0.23, green:0.37, blue:0.04, alpha:1.0)
+        //attackPoints.layer.cornerRadius = 25
         attackPoints.titleLabel?.font = UIFont(name: "Pokemon Classic", size:12.0)
         attackPoints.setTitle("Attack Points", for: .normal)
         view.addSubview(attackPoints)
@@ -198,8 +197,8 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
     
     func initializeDefensePoints() {
         defensePoints = UIButton(frame: CGRect(x:0, y:attributesLabel.frame.maxY + 100, width: view.frame.width, height: 50))
-        defensePoints.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
-        defensePoints.layer.cornerRadius = 25
+        defensePoints.backgroundColor = UIColor(red:0.23, green:0.37, blue:0.04, alpha:1.0)
+        //defensePoints.layer.cornerRadius = 25
         defensePoints.titleLabel?.font = UIFont(name: "Pokemon Classic", size:12.0)
         defensePoints.setTitle("Defense Points", for: .normal)
         view.addSubview(defensePoints)
@@ -244,8 +243,8 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
     
     func initializeHealthPoints() {
         healthPoints = UIButton(frame: CGRect(x:0, y:attributesLabel.frame.maxY + 200, width: view.frame.width, height: 50))
-        healthPoints.backgroundColor = UIColor(red:0.32, green:0.32, blue:0.13, alpha:1.0)
-        healthPoints.layer.cornerRadius = 25
+        healthPoints.backgroundColor = UIColor(red:0.23, green:0.37, blue:0.04, alpha:1.0)
+        //healthPoints.layer.cornerRadius = 25
         healthPoints.titleLabel?.font = UIFont(name: "Pokemon Classic", size:12.0)
         healthPoints.setTitle("Health Points", for: .normal)
         view.addSubview(healthPoints)
@@ -274,7 +273,6 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
             let num = Int(text!)!
             if num >= 0 && num <= 200 {
                 self.minHealth = Int(text!)!
-                print(self.minHealth)
                 self.healthPointsLab.text = text! + "-200"
                 self.resizeHealthLabel()
             }
@@ -353,7 +351,6 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
         }
         else {
             sendPokemon.removeAll()
-            //let typesSelected: Set<String> = Set(selectedTypes)
             for pokemon in pokemon {
                 if pokemon.attack >= minAttack && pokemon.defense >= minDefense && pokemon.health >= minHealth {
                     if selectedTypes.isEmpty {
@@ -361,7 +358,6 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
                     }
                     else {
                         for type in selectedTypes {
-                            print(pokemon.types.contains(type))
                             for typePokemon in pokemon.types {
                                 if typePokemon.lowercased() == type {
                                     sendPokemon.append(pokemon)
@@ -429,7 +425,6 @@ extension ViewController: LTInfiniteScrollViewDataSource {
             title?.append("_dim")
             sender.setTitle(title!, for: .normal)
             sender.setImage(UIImage(named: title!), for: .normal)
-            print(selectedTypes)
         }
     }
     
@@ -459,7 +454,6 @@ extension ViewController: LTInfiniteScrollViewDelegate {
     }
     
     func scrollViewDidScrollToIndex(_ scrollView: LTInfiniteScrollView, index: Int) {
-        //print("scroll to index: \(index)")
     }
 }
 

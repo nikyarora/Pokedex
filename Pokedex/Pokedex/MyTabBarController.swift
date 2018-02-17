@@ -36,7 +36,6 @@ class MyTabBarController: UITabBarController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("Profile view disappear")
         defaults.set(favorites, forKey: "favorites")
     }
     

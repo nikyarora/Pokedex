@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.navigationBar.backgroundColor = UIColor(red:0.58, green:0.19, blue:0.19, alpha:1.0)
         myTabBarVC = tabBarController as! MyTabBarController
         initializeNavBar()
         initializeImage()
@@ -154,7 +155,7 @@ class ProfileViewController: UIViewController, UITabBarControllerDelegate {
     }
 
     func initializeWeb() {
-        var webButton = UIButton(frame: CGRect(x: 0, y: view.frame.height - 100, width: view.frame.width, height: 50))
+        var webButton = UIButton(frame: CGRect(x: 0, y: view.frame.height - 150, width: view.frame.width, height: 50))
         webButton.backgroundColor = .black
         webButton.setTitle("Search on the Web", for: .normal)
         webButton.titleLabel?.font = UIFont(name: "Lato-Regular", size: 26)
