@@ -76,6 +76,7 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         selectedTypes.removeAll()
+        move = false
         scrollView.reloadData(initialIndex: 0)
     }
     
@@ -330,10 +331,19 @@ class ViewController: UIViewController, UITabBarControllerDelegate, UISearchBarD
             if move{
                 performSegue(withIdentifier: "showListScreen", sender: nil)
             }
+            else {
+                sendErrorAlert()
+            }
         }
         else {
             generateSearchWithButton()
         }
+    }
+    
+    func sendErrorAlert(){
+        let alert = UIAlertController(title: "Error", message: "No Pokemon Matching Criteria", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func generateSearchWithButton() {
