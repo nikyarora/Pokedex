@@ -18,8 +18,6 @@ class UserData: NSObject {
     }
     static func addToFavorites (name: String) {
         if faves == nil {
-            faves = []
-        } else {
             faves = defaults.array(forKey: defaultsKeys.favorites) as! [String]?
         }
         if (!faves!.contains(name)) {
